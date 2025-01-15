@@ -146,12 +146,6 @@
 </head>
 <body>
     <div id="controls">
-        <button id="zoomIn" class="control-button" aria-label="Zoom In">
-            <i class="fas fa-search-plus"></i>
-        </button>
-        <button id="zoomOut" class="control-button" aria-label="Zoom Out">
-            <i class="fas fa-search-minus"></i>
-        </button>
         <button id="print" class="control-button" aria-label="Print PDF">
             <i class="fas fa-print"></i>
         </button>
@@ -236,17 +230,6 @@
                 pdfDoc.getPage(num).then(page => renderPage(page, num));
             }
         };
-
-        // Zoom controls
-        document.getElementById('zoomIn').addEventListener('click', () => {
-            currentScale *= 1.25;
-            renderAllPages();
-        });
-
-        document.getElementById('zoomOut').addEventListener('click', () => {
-            currentScale *= 0.8;
-            renderAllPages();
-        });
 
         // Print functionality
         document.getElementById('print').addEventListener('click', () => {
