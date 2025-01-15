@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sveinbjorn.dev/">
+    <meta property="og:title" content="Sveinbjorn Geirsson - CV">
+    <meta property="og:description" content="Professional CV and Portfolio of Sveinbjorn Geirsson">
+    <meta property="og:image" content="https://sveinbjorn.dev/og-image.jpg">
+    
+    <!-- Additional tags for Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://sveinbjorn.dev/">
+    <meta name="twitter:title" content="Sveinbjorn Geirsson - CV">
+    <meta name="twitter:description" content="Professional CV and Portfolio of Sveinbjorn Geirsson">
+    <meta name="twitter:image" content="https://sveinbjorn.dev/og-image.jpg">
+    
+    <!-- Alternative language versions -->
+    <link rel="alternate" href="https://sveinbjorn.dev" hreflang="en">
+    <link rel="alternate" href="https://xn--sveinbjrn-r1a.is" hreflang="is">
+    
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <title>Sveinbjorn Geirsson</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
-        <style>body {
+        body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #2c2c2c;
             color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden;
-            /* Prevent scrollbars */
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         #viewer {
@@ -27,20 +45,27 @@
             align-items: center;
             width: 100%;
             padding: 20px;
+            box-sizing: border-box;
             background-color: #1e1e1e;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            overflow-y: auto;
-            /* Allow scrolling only within viewer */
-            max-height: 100vh;
-            /* Restrict to viewport height */
+            min-height: 100%;
+            overflow-y: visible;
+            touch-action: pan-y pinch-zoom;
+        }
 
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            max-width: 100vw;
+            margin-bottom: 20px;
+            touch-action: pan-x pan-y pinch-zoom; /* Enable touch gestures */
         }
 
         .pdf-page {
-            position: relative;
+            width: 100%;
+            height: auto;
             border: 1px solid #444;
-            margin-bottom: 10px;
             background: white;
+            touch-action: pan-y pinch-zoom; /* Enable vertical scrolling and pinch zoom */
         }
 
         #loading {
@@ -51,6 +76,7 @@
             font-size: 20px;
             color: white;
             display: none;
+            z-index: 1000;
         }
 
         #controls {
@@ -63,12 +89,12 @@
             background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 100;
         }
 
         .control-button {
-            width: 40px;
-            height: 40px;
+            width: 44px; /* Slightly larger for touch */
+            height: 44px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -76,6 +102,7 @@
             border: none;
             border-radius: 50%;
             cursor: pointer;
+            touch-action: manipulation; /* Optimize for touch */
         }
 
         .control-button:hover {
@@ -84,20 +111,6 @@
 
         .control-button i {
             font-size: 18px;
-            color: white;
-        }
-
-        #search-bar {
-            margin: 0;
-        }
-
-        #search {
-            width: 150px;
-            padding: 5px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background-color: #1e1e1e;
             color: white;
         }
 
@@ -114,13 +127,31 @@
             position: absolute;
             pointer-events: auto;
             color: transparent;
+            min-width: 44px; /* Minimum touch target size */
+            min-height: 44px;
+        }
+
+        @media (max-width: 768px) {
+            #viewer {
+                padding: 10px;
+            }
+            
+            .control-button {
+                width: 50px; /* Even larger on mobile */
+                height: 50px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
     <div id="controls">
+        <button id="zoomIn" class="control-button" aria-label="Zoom In">
+            <i class="fas fa-search-plus"></i>
+        </button>
+        <button id="zoomOut" class="control-button" aria-label="Zoom Out">
+            <i class="fas fa-search-minus"></i>
+        </button>
         <button id="print" class="control-button" aria-label="Print PDF">
             <i class="fas fa-print"></i>
         </button>
@@ -131,37 +162,45 @@
     <div id="loading">Loading PDF...</div>
     <div id="viewer" role="document" aria-label="PDF Viewer"></div>
 
-
     <script>
         const url = 'SveinbjornGeirsson.pdf';
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
         let pdfDoc = null;
-
-        const scale = 1.5;
+        let currentScale = 1.5;
         const viewer = document.getElementById('viewer');
         const loading = document.getElementById('loading');
 
         const renderPage = (page, num) => {
             const canvas = document.createElement('canvas');
+            const container = document.createElement('div');
+            container.className = 'pdf-container';
             canvas.className = 'pdf-page';
+            
             const linkLayer = document.createElement('div');
             linkLayer.className = 'link-layer';
 
-            const pageContainer = document.createElement('div');
-            pageContainer.style.position = 'relative';
-            pageContainer.appendChild(canvas);
-            pageContainer.appendChild(linkLayer);
-
-            viewer.appendChild(pageContainer);
+            container.appendChild(canvas);
+            container.appendChild(linkLayer);
+            viewer.appendChild(container);
 
             const ctx = canvas.getContext('2d');
-            const viewport = page.getViewport({ scale });
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+            const viewport = page.getViewport({ scale: currentScale });
+            
+            // Set canvas size based on viewport
+            const ratio = viewport.width / viewport.height;
+            const containerWidth = container.clientWidth;
+            canvas.width = containerWidth;
+            canvas.height = containerWidth / ratio;
 
-            return page.render({ canvasContext: ctx, viewport }).promise.then(() => {
+            // Scale viewport to match canvas size
+            const scaledViewport = page.getViewport({ scale: currentScale * (containerWidth / viewport.width) });
+
+            return page.render({
+                canvasContext: ctx,
+                viewport: scaledViewport
+            }).promise.then(() => {
                 return page.getAnnotations();
             }).then((annotations) => {
                 annotations.forEach((annotation) => {
@@ -169,22 +208,22 @@
                         const link = document.createElement('a');
                         link.href = annotation.url;
                         link.target = '_blank';
-
+                        
                         const rect = annotation.rect;
-                        const transform = viewport.transform;
-
+                        const transform = scaledViewport.transform;
+                        
                         const [x1, y1, x2, y2] = [
                             rect[0] * transform[0] + transform[4],
                             rect[1] * transform[3] + transform[5],
                             rect[2] * transform[0] + transform[4],
                             rect[3] * transform[3] + transform[5],
                         ];
-
+                        
                         link.style.left = `${Math.min(x1, x2)}px`;
                         link.style.top = `${Math.min(y1, y2)}px`;
                         link.style.width = `${Math.abs(x2 - x1)}px`;
                         link.style.height = `${Math.abs(y2 - y1)}px`;
-
+                        
                         linkLayer.appendChild(link);
                     }
                 });
@@ -198,10 +237,14 @@
             }
         };
 
-        loading.style.display = 'block';
-        pdfjsLib.getDocument(url).promise.then((pdfDoc_) => {
-            pdfDoc = pdfDoc_;
-            loading.style.display = 'none';
+        // Zoom controls
+        document.getElementById('zoomIn').addEventListener('click', () => {
+            currentScale *= 1.25;
+            renderAllPages();
+        });
+
+        document.getElementById('zoomOut').addEventListener('click', () => {
+            currentScale *= 0.8;
             renderAllPages();
         });
 
@@ -218,8 +261,20 @@
             link.click();
         });
 
+        // Load PDF
+        loading.style.display = 'block';
+        pdfjsLib.getDocument(url).promise.then((pdfDoc_) => {
+            pdfDoc = pdfDoc_;
+            loading.style.display = 'none';
+            renderAllPages();
+        });
 
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(renderAllPages, 200);
+        });
     </script>
 </body>
-
 </html>
