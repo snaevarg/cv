@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/iosevka/index.css');
+    text {
+      font-family: 'Iosevka', monospace;
+      font-weight: bold;
+      fill: #000;
+    }
+  </style>
+  <text x="3" y="14" font-size="13">SG</text>
+  <text x="3" y="27" font-size="13">CV</text>
+</svg>
