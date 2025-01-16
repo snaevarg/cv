@@ -1,8 +1,7 @@
-import { GlobalWorkerOptions, getDocument } from '/pdf.min.mjs';
+import { GlobalWorkerOptions, getDocument } from '/pdfjs/pdf.min.mjs';
 
-GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
-const url = 'SveinbjornGeirsson.pdf';
-
+GlobalWorkerOptions.workerSrc = '/pdfjs/pdf.worker.min.mjs';
+const baseUrl = 'SveinbjornGeirsson.pdf';
 
 let pdfDoc = null;
 let currentScale = 1.5;
@@ -22,21 +21,46 @@ const renderPage = (page, num) => {
     container.appendChild(linkLayer);
     viewer.appendChild(container);
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     const viewport = page.getViewport({ scale: currentScale });
     
-    // Set canvas size based on viewport
-    const ratio = viewport.width / viewport.height;
+    // Get the device pixel ratio
+    const pixelRatio = window.devicePixelRatio || 1;
+    
+    // Calculate dimensions to fit container width
     const containerWidth = container.clientWidth;
-    canvas.width = containerWidth;
-    canvas.height = containerWidth / ratio;
+    const scale = (containerWidth / viewport.width) * currentScale;
+    const scaledViewport = page.getViewport({ scale });
+    
+    // Set display size
+    const displayWidth = scaledViewport.width;
+    const displayHeight = scaledViewport.height;
+    
+    // Set canvas dimensions
+    canvas.style.width = `${displayWidth}px`;
+    canvas.style.height = `${displayHeight}px`;
+    canvas.width = Math.floor(displayWidth * pixelRatio);
+    canvas.height = Math.floor(displayHeight * pixelRatio);
 
-    // Scale viewport to match canvas size
-    const scaledViewport = page.getViewport({ scale: currentScale * (containerWidth / viewport.width) });
+    // // Calculate scale to fit container width
+    // const scale = (displayWidth / viewport.width) * currentScale;
+    
+    // // Create viewport with base scale (without pixel ratio)
+    // const scaledViewport = page.getViewport({ scale });
+
+    // Configure canvas context for better rendering
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    
+    // Reset transform and scale for device pixel ratio
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(pixelRatio, pixelRatio);
 
     return page.render({
         canvasContext: ctx,
-        viewport: scaledViewport
+        viewport: scaledViewport,
+        enableWebGL: true,
+        renderInteractiveForms: true
     }).promise.then(() => {
         return page.getAnnotations();
     }).then((annotations) => {
@@ -54,7 +78,7 @@ const renderPage = (page, num) => {
                     rect[1] * transform[3] + transform[5],
                     rect[2] * transform[0] + transform[4],
                     rect[3] * transform[3] + transform[5],
-                ];
+                ].map(coord => coord / pixelRatio); // Adjust coordinates for pixel ratio
                 
                 link.style.left = `${Math.min(x1, x2)}px`;
                 link.style.top = `${Math.min(y1, y2)}px`;
@@ -74,28 +98,39 @@ const renderAllPages = () => {
     }
 };
 
-// Print functionality
-document.getElementById('print').addEventListener('click', () => {
-    window.open(url);
-});
+// Initialize PDF viewer with the appropriate version
+const initViewer = async () => {
+    loading.style.display = 'block';
+    const url = baseUrl;
+    
+    document.getElementById('print').addEventListener('click', () => {
+        window.open(url);
+    });
 
-// Download functionality
-document.getElementById('download').addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'SveinbjornGeirsson.pdf';
-    link.click();
-});
+    document.getElementById('download').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = url.split('/').pop();
+        link.click();
+    });
 
-// Load PDF
-loading.style.display = 'block';
-getDocument(url).promise.then((pdfDoc_) => {
-pdfDoc = pdfDoc_;
-loading.style.display = 'none';
-renderAllPages();
-});
+    // Load PDF with enhanced options
+    getDocument({
+        url: url,
+        cMapUrl: '/pdfjs/cmaps/',
+        cMapPacked: true,
+        enableXfa: true        
+    }).promise.then((pdfDoc_) => {
+        pdfDoc = pdfDoc_;
+        loading.style.display = 'none';
+        renderAllPages();
+    });
+};
 
-// Handle window resize
+// Start the viewer
+initViewer();
+
+// Handle window resize with debouncing
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
