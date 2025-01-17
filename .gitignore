@@ -1,0 +1,52 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.out
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+_minted*
+*.pyg
+
+# LaTeX build output
+*.pdf
+
+# PDF.js specific (if you're building/modifying PDF.js locally)
+node_modules/
+build/
+.DS_Store
+
+# Editor specific files
+.vscode/
+.idea/
+*.swp
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# LaTeX editor specific
+*.nav
+*.snm
+*.vrb
+
+# Latexmk
+.latexmk/
+
+# BibTeX
+*.bib.bak
+*.sav
+
+# Generated figures
+figures/*.pdf
+plots/*.pdf
+
+# Keep specific PDFs if needed (uncomment and modify as needed)
+!SveinbjornGeirsson.pdf
+

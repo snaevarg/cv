@@ -1,0 +1,24 @@
+{
+  "subject": "acct:sveinbjorn@sveinbjorn.dev",
+  "aliases": [
+    "https://sveinbjorn.dev/@sveinbjorn",
+    "https://sveinbjorn.dev/profile/sveinbjorn"
+  ],
+  "links": [
+    {
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html",
+      "href": "https://sveinbjorn.dev/@sveinbjorn"
+    },
+    {
+      "rel": "self",
+      "type": "application/activity+json",
+      "href": "https://sveinbjorn.dev/users/sveinbjorn"
+    },
+    {
+      "rel": "http://schemas.google.com/g/2010#updates-from",
+      "type": "application/atom+xml",
+      "href": "https://sveinbjorn.dev/feed.xml"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+    "links": [
+      {
+        "rel": "lrdd",
+        "template": "https://sveinbjorn.dev/.well-known/webfinger?resource={uri}"
+      }
+    ]
+  }

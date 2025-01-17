@@ -43,53 +43,49 @@
 \definecolor{linkcolor}{HTML}{4A5568}  % Subtle blue-gray
 \definecolor{accent}{HTML}{5A6572}  % Slightly lighter than secondarytext
 
-
-
-% Font configuration
-\setmainfont{Iosevka}[
-  % Using font names directly instead of files
-  UprightFeatures={Font=* },
-  BoldFeatures={Font=* Bold},
-  ItalicFeatures={Font=* Italic},
-  BoldItalicFeatures={Font=* Bold Italic}
-]
-
 \hypersetup{
-  pdftitle={Sveinbjörn Geirsson - CV}, % Title
-  pdfauthor={Sveinbjörn Geirsson},     % Author
-  pdfsubject={Software Developer Resume}, % Subject
-  pdfkeywords={resume, CV, software developer, cloud infrastructure, Iceland}, % Keywords
-  pdfcreator={XeLaTeX},               % Creator
-  pdfproducer={XeLaTeX with hyperref}, % Producer
-  pdfcreationdate={D:20250113090000}, % Creation date in the format YYYYMMDDHHMMSS
-  pdfmoddate={D:20250113090000},       % Modification date in the same format
-  colorlinks=false,
+  pdftitle={Sveinbjörn Geirsson - CV},
+  pdfauthor={Sveinbjörn Geirsson},
+  pdfsubject={Software Developer Resume},
+  pdfkeywords={resume, CV, software developer, cloud infrastructure, Iceland},
+  pdfcreator={XeLaTeX},
+  pdfproducer={XeLaTeX with hyperref},
+  unicode=true,
+  pdfborder={0 0 0},
+  breaklinks=true,
+  colorlinks=true,
   linkcolor=linkcolor,
   filecolor=linkcolor,
   urlcolor=linkcolor,
-  pdfborderstyle={/S/U/W 1},  % Underline style
-  linkbordercolor={.5 .5 .5},  % Very light gray
-  filebordercolor={.5 .5 .5},
-  urlbordercolor={.5 .5 .5}
+  pdfnewwindow=true,
+  pdfdisplaydoctitle=true
 }
+
+% Font configuration
+\setmainfont{InterNerdFontPropo}[
+    Path = /usr/share/fonts/inter/,
+    UprightFont = InterNerdFontPropo-Regular.otf,
+    BoldFont = InterNerdFontPropo-Bold.otf,
+    ItalicFont = InterNerdFontPropo-Italic.otf,
+    BoldItalicFont = InterNerdFontPropo-BoldItalic.otf
+]
+
+\newfontfamily{\headingfont}{Iosevka}[
+    UprightFeatures={Font=*},
+    BoldFeatures={Font=* Bold},
+    ItalicFeatures={Font=* Italic},
+    BoldItalicFeatures={Font=* Bold Italic}
+]
+
+
 
 \newcommand{\isFlag}{%
 \begin{tikzpicture}[y=0.3cm, x=0.3cm, yscale=0.1, xscale=0.1, every node/.append style={scale=0.1}, inner sep=0pt, outer sep=0pt]
   \begin{scope}[even odd rule,line width=0.0cm]
     \path[fill=c003897,even odd rule,line width=0.0cm] (0.0, 0.0) -- (17.6398, 0.0) -- (17.6398, -12.7) -- (0.0, -12.7) -- cycle;
-
-
-
     \path[fill=white,even odd rule,line width=0.0cm] (0.0, -4.9398) -- (4.9398, -4.9398) -- (4.9398, 0.0) -- (7.7602, 0.0) -- (7.7602, -4.9398) -- (17.6398, -4.9398) -- (17.6398, -7.7602) -- (7.7602, -7.7602) -- (7.7602, -12.7) -- (4.9398, -12.7) -- (4.9398, -7.7602) -- (0.0, -7.7602) -- cycle;
-
-
-
     \path[fill=cd72828,even odd rule,line width=0.0cm] (0.0, -5.6436) -- (5.6436, -5.6436) -- (5.6436, 0.0) -- (7.0564, 0.0) -- (7.0564, -5.6436) -- (17.6398, -5.6436) -- (17.6398, -7.0564) -- (7.0564, -7.0564) -- (7.0564, -12.7) -- (5.6436, -12.7) -- (5.6436, -7.0564) -- (0.0, -7.0564) -- cycle;
-
-
-
   \end{scope}
-
 \end{tikzpicture}
 }
 
@@ -98,7 +94,6 @@
 \begin{tikzpicture}[y=0.5cm, x=0.5cm, yscale=0.1, xscale=0.1, every node/.append style={scale=0.1}, inner sep=0pt, outer sep=0pt]
     \begin{scope}
     \path[fill={rgb:red,100;green,90;blue,83}] (7.226, 17.7421).. controls (7.2002, 17.7628) and (7.1712, 17.7767) .. (7.1396, 17.7827).. controls (6.9531, 17.5968) and (6.7255, 17.4009) .. (6.5233, 17.2693).. controls (6.4301, 17.2073) and (6.3128, 17.1763) .. (6.2351, 17.1763).. controls (6.0563, 17.1763) and (5.9787, 17.3468) .. (5.9553, 17.6177).. controls (5.9242, 17.9817) and(5.9032, 18.4176) .. (5.9032, 19.0914).. controls (5.9032, 19.7824) and (5.7464, 20.2521) .. (5.3286, 20.289).. controls (5.311, 20.2906) and (5.2931, 20.2917) .. (5.2745, 20.2917).. controls (5.018, 20.2917) and (4.8937, 20.1601) .. (4.7305, 19.827).. controls (4.5906, 19.5405) and (4.373, 19.1224) .. (3.969, 18.3325).. controls (3.6192, 17.651) and (3.2307, 17.047) .. (2.8965, 16.6288).. controls (2.8034, 16.5129) and (2.7298, 16.4332) .. (2.6607, 16.3879).. controls (2.6145, 16.3575) and (2.5702, 16.3423) .. (2.5235, 16.3423).. controls (2.3916, 16.3423) and (2.2953, 16.4536) .. (2.2631, 16.7128).. controls (2.2555, 16.7744) and (2.2514, 16.8444) .. (2.2514, 16.9231).. controls (2.2514, 17.4574) and (2.4536, 18.3247) .. (2.8032, 19.6025).. controls (3.0597, 20.5318) and (2.9509, 21.1667) .. (2.3913, 21.1667).. controls (2.3904, 21.1667) and (2.3895, 21.1667) .. (2.3886, 21.1667).. controls (2.3875, 21.1667) and (2.3863, 21.1667) .. (2.385, 21.1667) -- (2.3846, 21.1666).. controls (2.2579, 21.1651) and (2.1529, 21.1192) .. (2.0517, 21.0396).. controls (1.952, 20.9611) and (1.8523, 20.7916) .. (1.7592, 20.5638).. controls (1.6543, 20.3072) and (1.0162, 19.0273) .. (0.0007, 18.368).. controls (-0.0113, 18.1173) and (0.1306, 17.8668) .. (0.4182, 17.8396).. controls (0.6799, 17.8148) and (0.8658, 17.9251) .. (1.1051, 18.0858).. controls (1.0871, 18.0059) and (1.0706, 17.9312) .. (1.0555, 17.8628).. controls (1.0376, 17.7821) and (1.0224, 17.7125) .. (1.0102, 17.6563).. controls (0.992, 17.5726) and (0.9804, 17.5188) .. (0.977, 17.5039).. controls (0.9438, 17.3514) and (0.92, 17.2065) .. (0.9046, 17.069).. controls (0.7614, 15.7891) and (1.3547, 15.1575) .. (2.0494, 15.1575).. controls (2.1655, 15.1575) and (2.2806, 15.1713) .. (2.3948, 15.2004).. controls (3.1603, 15.3945) and (3.8972, 16.2725) .. (4.7694, 18.2938).. controls (4.7562, 18.0739) and (4.7548, 17.8685) .. (4.7643, 17.678).. controls (4.8218, 16.5195) and (5.28, 16.172) .. (5.9274, 16.172).. controls (6.4169, 16.172) and (6.8754, 16.4275) .. (7.1085, 16.745).. controls (7.2796, 16.9696) and (7.3495, 17.2174) .. (7.3495, 17.411).. controls (7.3495, 17.5613) and (7.3018, 17.6812) .. (7.226, 17.7421);
-
     \path[fill={rgb:red,234;green,82;blue,82}] (19.5086, 16.0044) -- (20.116, 16.0044) -- (21.1668, 18.6675) -- (20.5656, 18.6675) -- (20.1313, 17.3412) -- (19.6737, 18.6675) -- (19.0027, 18.6675) -- (19.8016, 16.7439) -- (19.5086, 16.0044) -- cycle(16.4941, 18.0353) -- (16.4941, 16.6702) -- (15.8813, 16.6702) -- (15.8813, 18.6675) -- (16.3119, 18.6675) -- (16.4398, 18.493).. controls (16.6066, 18.6326) and (16.785, 18.7141) .. (16.9905, 18.7141).. controls (17.2659, 18.7141) and (17.4753, 18.6326) .. (17.6033, 18.4308).. controls (17.7894, 18.6016) and (17.9872, 18.7141) .. (18.2394, 18.7141).. controls (18.7125, 18.7141) and (18.9878, 18.4697) .. (18.9878, 17.8065) -- (18.9878, 16.6702) -- (18.3751, 16.6702) -- (18.3751, 17.7367).. controls (18.3751, 18.0431) and (18.2509, 18.1323) .. (18.0531, 18.1323).. controls (17.9368, 18.1323) and (17.8399, 18.1013) .. (17.7313, 18.0315).. controls (17.7391, 17.9617) and (17.7429, 17.888) .. (17.7429, 17.8065) -- (17.7429, 16.6702) -- (17.1302, 16.6702) -- (17.1302, 17.7367).. controls (17.1302, 18.0431) and (17.006, 18.1323) .. (16.8044, 18.1323).. controls (16.6919, 18.1323) and (16.5988, 18.1051) .. (16.4941, 18.0353) -- (16.4941, 18.0353) -- cycle(14.357, 17.8647) -- (15.1443, 17.8647).. controls (15.1017, 18.1245) and(14.962, 18.2486) .. (14.7526, 18.2486).. controls (14.5741, 18.2486) and (14.4036, 18.1439) .. (14.357, 17.8647) -- (14.357, 17.8647) -- cycle(14.7953, 16.6314).. controls (14.2058, 16.6314) and (13.7326, 16.9223) .. (13.7326, 17.6902).. controls (13.7326, 18.4077) and (14.1903, 18.7179) .. (14.7177, 18.7179).. controls (15.3537, 18.7179) and (15.6368, 18.272) .. (15.6368, 17.57) -- (14.3531, 17.57).. controls (14.3958, 17.2248) and (14.6091, 17.1239) .. (14.8923, 17.1239).. controls (15.1661, 17.1239) and (15.3803, 17.1915) .. (15.546, 17.303) -- (15.4629, 16.817).. controls (15.3047, 16.6948) and (15.1148, 16.6314) .. (14.7953, 16.6314) -- (14.7953, 16.6314) -- cycle(12.5136, 17.1472).. controls (12.6532, 17.1472) and (12.7579, 17.1705) .. (12.8665, 17.2519) -- (12.8665, 18.1206).. controls (12.7696, 18.1789) and (12.6727, 18.206) .. (12.5331, 18.206).. controls (12.2344, 18.206) and(12.0638, 18.0043) .. (12.0638, 17.6669).. controls (12.0638, 17.3372) and (12.2384, 17.1472) .. (12.5136, 17.1472) -- (12.5136, 17.1472) -- cycle(12.9867, 16.8176).. controls (12.8278, 16.6973) and (12.6456, 16.6237) .. (12.3857, 16.6237).. controls (11.8388, 16.6237) and (11.4433, 16.961) .. (11.4433, 17.6553).. controls (11.4433, 18.3456) and (11.8971, 18.7179) .. (12.4787, 18.7179).. controls (12.6145, 18.7179) and (12.7464, 18.6985) .. (12.8665, 18.652) -- (12.8665, 19.4997) -- (13.4794, 19.4997) -- (13.4794, 16.6702) -- (13.0915, 16.6702) -- (12.9867, 16.8176) -- cycle(8.8469, 17.8531) -- (8.8469, 19.3333) -- (9.4829, 19.3333) -- (9.4829, 17.8647).. controls (9.4829, 17.3372) and (9.7195, 17.2287) .. (10.0453, 17.2287).. controls (10.3982, 17.2287) and (10.5805, 17.3838) .. (10.5805, 17.8647) -- (10.5805, 19.3333) -- (11.2204, 19.3333) -- (11.2204, 17.8531).. controls (11.2204, 16.9804) and (10.8403, 16.6159) .. (10.0143, 16.6159).. controls (9.2464, 16.6159) and (8.8469, 16.93) .. (8.8469, 17.8531) -- (8.8469, 17.8531) -- cycle;
   \end{scope}
 \end{tikzpicture}%
@@ -109,31 +104,12 @@
   \begin{tikzpicture}[y=0.5cm, x=0.5cm, yscale=0.1, xscale=0.1, every node/.append style={scale=0.1}, inner sep=0pt, outer sep=0pt]
     \begin{scope}[fill=blue]
       \path[fill=blue] (10.6383, 20.2062).. controls (10.6512, 20.4542) and (10.7401, 20.6569) .. (10.8791, 20.8151) -- (10.8791, 21.0258) -- (10.6944, 21.0258).. controls (10.321, 21.0258) and (10.0049, 20.8827) .. (9.8212, 20.5594) -- (9.8104, 20.5594) -- (9.8104, 20.9902) -- (8.8528, 20.9902) -- (8.8528, 18.3628) -- (9.8106, 18.3628) -- (9.8106, 19.4235).. controls (9.8106, 19.8736) and (9.9424, 20.2169) .. (10.4739, 20.2169).. controls (10.5317, 20.2165) and (10.5859, 20.2132) .. (10.6383, 20.2062) -- (10.6383, 20.2062) -- cycle;
-
-
-
       \path[fill=blue] (17.8903, 20.2157).. controls (17.9699, 20.448) and (18.0989, 20.6548) .. (18.2666, 20.8207) -- (18.2666, 21.026) -- (18.0823, 21.026).. controls (17.7087,21.026) and (17.393, 20.8829) .. (17.2083, 20.5598) -- (17.1979, 20.5598) -- (17.1979, 20.9902) -- (16.2397, 20.9902) -- (16.2397, 18.3628) -- (17.1979, 18.3628) -- (17.1979, 19.4235).. controls (17.1979, 19.8736) and (17.3301, 20.2169) .. (17.8616, 20.2169) -- (17.8903, 20.2157) -- (17.8903, 20.2157) -- cycle;
-  
-  
-  
       \path[fill=blue] (12.5835, 20.3143).. controls (12.4357, 20.3911) and (12.23, 20.4423) .. (12.0664, 20.4423).. controls (11.9566, 20.4423) and (11.7668, 20.3966) .. (11.7668, 20.263).. controls (11.7668, 20.0836) and (12.0664, 20.0582) .. (12.199, 20.032).. controls (12.6454, 19.9452) and (12.9832, 19.7401) .. (12.9832, 19.2542).. controls (12.9832, 18.563) and (12.3356, 18.2752) .. (11.7087, 18.2752).. controls (11.3242, 18.2752) and (10.9459, 18.3829) .. (10.6191, 18.5776) -- (10.9665, 19.2286).. controls (11.161, 19.0949) and (11.4874, 18.9621) .. (11.7243, 18.9621).. controls (11.8455, 18.9621) and (12.0244, 19.0182) .. (12.0244, 19.1617).. controls (12.0244, 19.3666) and (11.7243, 19.3773) .. (11.4239, 19.454).. controls (11.1242, 19.5308) and (10.8246, 19.6739) .. (10.8246, 20.1452).. controls (10.8246, 20.7906) and (11.4239, 21.077) .. (12.0146, 21.077).. controls (12.32, 21.077) and (12.6255, 21.0311) .. (12.9039, 20.9081) -- (12.5835, 20.3143) -- (12.5835, 20.3143) -- cycle;
-  
-  
-  
       \path[fill=blue] (21.1392, 18.3628) -- (20.1813, 18.3628) -- (20.1813, 18.655) -- (20.1708, 18.655).. controls (20.0023, 18.3939) and (19.67, 18.2762) .. (19.3547, 18.2762).. controls (18.554, 18.2762) and (17.9912, 18.9268) .. (17.9912, 19.6797).. controls (17.9912, 20.4319) and (18.544, 21.0776) .. (19.3439, 21.0776).. controls (19.6543, 21.0776) and (19.9812, 20.965) .. (20.1811, 20.7347) -- (20.1811, 20.9902) -- (21.1388, 20.9902) -- (21.1392, 18.3628) -- (21.1392, 18.3628) -- cycle(18.9809, 19.6741).. controls (18.9809, 19.3414) and (19.2077, 19.0853) .. (19.5967, 19.0853).. controls (19.986, 19.0853) and (20.2118, 19.341) .. (20.2118, 19.6741).. controls (20.2118, 19.9968) and (19.986, 20.2681) ..(19.5967, 20.2681).. controls (19.2077, 20.2679) and (18.9809, 19.9968) .. (18.9809, 19.6741) -- (18.9809, 19.6741) -- cycle;
-  
-  
-  
       \path[fill=blue] (16.0886, 19.52) -- (14.0718, 19.52).. controls (14.0718, 19.1414) and (14.2777, 18.9367) .. (14.6724, 18.9367).. controls (14.8776, 18.9367) and (15.0248,19.003) .. (15.1304, 19.1774) -- (16.0518, 19.1774).. controls (15.8992, 18.5575) and (15.2936, 18.2758) .. (14.6778, 18.2758).. controls (13.7835, 18.2758) and (13.115, 18.7678) .. (13.115, 19.6739).. controls (13.115, 20.5496) and (13.7301, 21.077) .. (14.6092, 21.077).. controls (15.5461, 21.077) and (16.089, 20.5135) .. (16.089, 19.6176) -- (16.0886, 19.52) -- (16.0886, 19.52) -- cycle(15.1988, 20.0582).. controls (15.1513, 20.3092) and (14.9144, 20.473) .. (14.6567, 20.473).. controls (14.3774, 20.473) and (14.1467, 20.3301) .. (14.0879, 20.0582) -- (15.1988, 20.0582) -- (15.1988, 20.0582) -- cycle;
-  
-  
-  
       \path[fill=blue] (5.806, 19.7198).. controls (5.8051, 19.7425) and (5.8035, 19.7646) .. (5.8017, 19.7871) -- (5.8017, 19.7874) -- (5.8017, 19.7878).. controls (5.7802, 20.0316) and (5.6997, 20.2597) .. (5.5631, 20.4658).. controls (5.5021, 20.5576) and (5.4323, 20.6411) .. (5.3543, 20.716).. controls (5.2403, 20.8256) and (5.1084, 20.9163) .. (4.9596, 20.9881).. controls (4.7358, 21.095) and (4.4885, 21.149) .. (4.2246, 21.149).. controls (4.1988, 21.149) and (4.1718, 21.1486) .. (4.1447, 21.1476).. controls (3.9593, 21.1392) and (3.7801, 21.104) .. (3.6116, 21.042).. controls (3.4417, 20.9806) and (3.2937, 20.8995) .. (3.1727, 20.8022).. controls (3.1481, 20.7826) and (3.1213, 20.7586) .. (3.0926, 20.7322) -- (3.0719, 20.7119) -- (3.0435, 20.6818) -- (3.0437, 20.6818) -- (3.0439, 20.6818) -- (3.0306, 20.6687) -- (3.0242, 20.6616) -- (2.9904, 20.626).. controls (2.9653, 20.5979) and (2.9415, 20.5697) .. (2.9192, 20.5422) -- (2.919, 20.5426) -- (2.9182, 20.5434).. controls (2.8719, 20.4871) and (2.8291, 20.4288) .. (2.7976, 20.3764).. controls (2.7763, 20.3428) and (2.7554, 20.3082) .. (2.7355, 20.2736) -- (2.4592, 19.7151) -- (2.4596, 19.7147) -- (2.4452, 19.6864) -- (2.4147, 19.6246).. controls (2.3541, 19.502) and (2.2892, 19.3799) .. (2.2167, 19.279).. controls (2.055, 19.1017) and (1.8722, 19.0149) .. (1.6373, 19.0149).. controls (1.6208, 19.0149) and (1.604, 19.0157) .. (1.5868, 19.0167).. controls (1.4453, 19.0223) and (1.3239, 19.0558) .. (1.2162, 19.1195).. controls (1.2047, 19.1263) and (1.1935, 19.1334) .. (1.1828, 19.1406).. controls (1.0948, 19.1991) and (1.0274, 19.2741) .. (0.9769, 19.3678).. controls (0.92, 19.4739) and (0.8948, 19.5824) .. (0.8983, 19.6973).. controls (0.8985, 19.7005) and (0.8987, 19.7032) .. (0.8987, 19.7057).. controls (0.9064, 19.8887) and (0.9761, 20.031) .. (1.1167, 20.154).. controls (1.1509, 20.1835) and (1.1867, 20.2085) .. (1.224, 20.2308).. controls (1.2293, 20.2339) and (1.2346, 20.2368) .. (1.2398, 20.2396).. controls (1.3442, 20.2965) and (1.4631, 20.3248) .. (1.5993, 20.3248) -- (1.6418, 20.3236).. controls (1.8581, 20.3154) and (2.0251, 20.2478) .. (2.1582, 20.1158) -- (2.5757, 20.8655).. controls (2.4759, 20.9324) and (2.3631, 20.9898) .. (2.2387, 21.0366).. controls (2.2341, 21.0383) and (2.2292, 21.0403) .. (2.2243, 21.0418).. controls (2.2094, 21.0471) and (2.1948, 21.0526) .. (2.1795, 21.0575).. controls (2.0474, 21.1016) and (1.9088, 21.1288) .. (1.7661, 21.1411) -- (1.7661, 21.1411).. controls (1.7626, 21.1417) and (1.7586, 21.1421) .. (1.7551, 21.1425).. controls (1.7332, 21.1439) and (1.711, 21.1466) .. (1.6891, 21.1476).. controls (1.6652, 21.1486) and (1.6412, 21.149) .. (1.6177, 21.1491) -- (1.6042, 21.1491).. controls (1.3417, 21.1482) and (1.0977, 21.0944) .. (0.8747, 20.9879).. controls (0.6249, 20.8675) and (0.4224, 20.6921) .. (0.2722, 20.4661).. controls (0.1225, 20.2402) and (0.0408, 19.9894) .. (0.0291, 19.7202).. controls (0.0281, 19.6971) and (0.0275, 19.6743) .. (0.0275, 19.6518).. controls (0.0273, 19.2753) and (0.1645, 18.9441) .. (0.4374, 18.6662).. controls (0.7222, 18.3745) and (1.0927, 18.2174) .. (1.5374, 18.1988).. controls (1.5659, 18.1976) and (1.5941, 18.1968) .. (1.6222, 18.1968).. controls (1.8738, 18.1968) and (2.1066, 18.2416) .. (2.3154, 18.3311).. controls (2.3676, 18.3534) and (2.4182, 18.3796) .. (2.47, 18.4087).. controls (2.4981, 18.425) and (2.5247, 18.4422).. (2.5511, 18.4605) -- (2.5707, 18.4736) -- (2.6035, 18.4961).. controls (2.643, 18.5245) and (2.6799, 18.5551) .. (2.7159, 18.5878) -- (2.7284, 18.5997).. controls (2.7495, 18.6198) and (2.7706, 18.6402) .. (2.7906, 18.6611) -- (2.8654, 18.7457) -- (2.894, 18.7815) -- (2.9073, 18.8011) -- (2.9206, 18.8202).. controls (3.0318, 19.0071) and (3.3938, 19.6872) .. (3.3938, 19.6872) -- (3.3938, 19.6885) -- (3.4153, 19.73) -- (3.4333, 19.7624).. controls (3.4867, 19.8596) and (3.5252, 19.9286) .. (3.5762, 20.0011) -- (3.5776, 20.0033).. controls (3.6966, 20.1759) and (3.9013, 20.2988) .. (4.1425, 20.3195).. controls (4.5471, 20.3543) and (4.9017, 20.0885) .. (4.9344, 19.7257).. controls (4.9668, 19.3629) and (4.665, 19.0405) .. (4.2604, 19.0055).. controls (4.1761, 18.9983) and (4.0942, 19.004) .. (4.017, 19.021) -- (4.0151, 19.0202).. controls (3.7181, 19.082) and (3.5291, 19.2986) .. (3.4359, 19.3953) -- (3.0465, 18.6793).. controls (3.0465, 18.6793) and (3.1675, 18.5573) .. (3.2503, 18.4963).. controls (3.3334, 18.4355) and (3.4407, 18.3757) .. (3.5264, 18.3386).. controls (3.7342, 18.2498) and (3.9601, 18.1966) .. (4.2098, 18.1966).. controls (4.2387, 18.1966) and (4.2328, 18.1966) .. (4.2629, 18.1978).. controls (4.7072, 18.2164) and (5.1033, 18.3866) .. (5.3889, 18.6783).. controls (5.6594, 18.9553) and (5.8062, 19.2716) .. (5.8076, 19.6459) -- (5.8076, 19.6571).. controls (5.8074, 19.6778) and (5.8068, 19.6987) ..(5.806, 19.7198) -- (5.806, 19.7198) -- cycle;
-  
-  
-  
       \path[fill=blue] (7.2956, 18.274).. controls (7.0936, 18.274) and (6.9105, 18.2975) .. (6.7461, 18.3444).. controls (6.5817, 18.3913) and (6.4413, 18.4654) .. (6.325, 18.5671).. controls (6.2083, 18.6687) and (6.1184, 18.7981) .. (6.0551, 18.9551).. controls (5.9917, 19.1121) and (5.9601, 19.3013) .. (5.9601, 19.5218) -- (5.9601, 20.9908) -- (6.8841,20.9908) -- (6.8841, 19.5335).. controls (6.8841, 19.3683) and (6.9236, 19.2487) .. (7.0024, 19.174).. controls (7.0813, 19.0992) and (7.1816, 19.0618) .. (7.3032, 19.0618).. controls (7.4275, 19.0618) and (7.5284, 19.0966) .. (7.6062, 19.1664).. controls (7.6836, 19.2362) and (7.7227, 19.3519) .. (7.7227, 19.5146) -- (7.7227, 20.9908) -- (8.6467, 20.9908) -- (8.6467, 19.5411).. controls (8.6467, 19.3128) and (8.6143, 19.1187) .. (8.5496, 18.959).. controls (8.4849, 18.7991) and (8.3936, 18.6685) .. (8.2761, 18.5669).. controls (8.158, 18.4652) and (8.0159, 18.3913) .. (7.8488, 18.3442).. controls (7.6816, 18.2975) and (7.4973, 18.274) .. (7.2956, 18.274) -- (7.2956, 18.274) -- cycle;
-  
     \end{scope}
   \end{tikzpicture}%
 }
@@ -141,41 +117,78 @@
 \newcommand{\qrlink}[2]{%
   \href{#1}{#2}% Makes the text clickable
   \hspace{0.5em}%
-  \raisebox{-0.2\height}{\qrcode[height=0.9cm]{#1}}% Keeps the QR code
+  \raisebox{-0.2\height}{%
+    \qrcode[height=1.1cm,version=4,level=Q]{#1}%
+  }% QR code with optimized settings
 }
 
-
-\newcommand{\certlink}[3][]{%  % Optional platform parameter
+\newcommand{\certlink}[3][]{%
   \href{#2}{%
-    \ifx\\#1\\%  % If no platform specified
+    \ifx\\#1\\%
       #3%
     \else%
-      \ifx\udemy#1%  % If platform is Udemy
+      \ifx\udemy#1%
         \udemy\ %
       \else%
-        \ifx\coursera#1%  % If platform is Coursera
+        \ifx\coursera#1%
           \coursera\ %
         \fi%
       \fi%
       #3%
     \fi%
   }%
-  \hfill\raisebox{-0.2\height}{\qrcode[height=0.9cm]{#2}}\ %
+  \raisebox{-0.2\height}{%
+    \qrcode[height=1.0cm,version=4,level=Q]{#2}%
+  }%
 }
 
-\newcommand{\cvheading}[1]{%
-  \section*{#1}
-  \vspace{-0.2cm}
-  \hrule
-  \vspace{0.2cm}
+% Define a new command for certification entries with the new layout
+\newcommand{\certentry}[4][]{%  % #1=platform (optional), #2=url, #3=name, #4=year
+    \noindent
+    \begin{minipage}{\columnwidth}
+        \raisebox{0.7\height}{\qrcode[height=1.2cm]{#2}}
+        \hspace{0.2cm}
+        \begin{minipage}[b]{0.7\columnwidth}
+            {\small #1}\\
+            {\textbf{#3}}\\
+            {\small\textcolor{secondarytext}{#4}}
+                  \end{minipage}
+    \end{minipage}
+    \vspace{0.8cm}
 }
 
+\newcommand{\projectentry}[5]{%  % #1=name, #2=year, #3=subtitle, #4=description, #5=links
+    \item 
+    \textbf{#1} \hfill \textit{#2}\\
+    \textit{#3}\\[0.1cm]
+    \begin{minipage}[t]{\linewidth}
+        #4
+        \vspace{0.2cm}
+        #5
+    \end{minipage}
+    \vspace{0.3cm}
+}
+
+
+\newcommand{\projectlink}[2]{%
+  \href{#1}{#2}\hspace{0.5em}%
+  \raisebox{-0.2\height}{%
+    \qrcode[height=0.9cm,version=3,level=Q]{#1}%
+  }\hspace{1em}%
+}
+
+% Create a simpler link command without QR code for reference links
+\newcommand{\reflink}[2]{%  % #1=url, #2=display text
+    \href{#1}{#2}\hspace{1em}%
+}
+
+% Adjust font sizes
 \newcommand{\workentry}[4]{%
   \noindent
-  {\large\textbf{#1}} \hfill \textit{#2}\\[0.1cm]     
-  {\textit{#3}}\\[0.1cm]  % Reduced from 0.3cm to 0.1cm
+  {\headingfont\large\textbf{#1}} \hfill {\small\textit{#2}}\\[0.1cm]     
+  {\small\textit{#3}}\\[0.1cm]
   #4
-  \vspace{0.3cm}  % Reduced from 1cm to 0.2cm
+  \vspace{0.3cm}
 }
 
 \newcommand{\skillgroup}[2]{%
@@ -183,15 +196,27 @@
   #2\\[0.3cm]  % Increased from 0.1cm and removed negative spacing
 }
 
+% Update commands to use Iosevka for headings
+\newcommand{\cvheading}[1]{%
+  {\headingfont\section*{#1}}
+  \vspace{-0.2cm}
+  \hrule
+  \vspace{0.2cm}
+}
+
+% Use Iosevka for the name at the top
+\newcommand{\nameheading}{%
+  {\headingfont\LARGE\textbf{Sveinbjörn Geirsson}}
+}
+
 % Tighter lists
 \setlist{nosep,leftmargin=*}
 
 % Tighter section spacing
-\titlespacing{\section}{0pt}{*1.5}{*0.5}
+\titlespacing{\section}{0pt}{*2}{*1}
 
 % Document start
 \begin{document}
-
  
  \begin{minipage}[t]{0.45\textwidth}  % Middle for text
   \vspace{0pt}
@@ -266,7 +291,7 @@ Software engineer with a decade of experience in the payment card industry, focu
     \begin{itemize}[leftmargin=1em, topsep=0pt]
       \item Implemented real-time FX rate processing system integrating rates from Visa, Mastercard, and central banks.
       \item Developed intelligent transaction categorization system for product offerings and geographical boundaries.
-      \item Built automated systems for processing complex financial data streams including chargebacks and interchange.
+      \item Built systems for processing complex financial data streams including chargebacks and interchange.
     \end{itemize}
 \end{description}
 }
@@ -334,62 +359,86 @@ Software engineer with a decade of experience in the payment card industry, focu
 \end{itemize}
 \end{multicols}
 
-
 \cvheading{Notable Projects}
-\begin{itemize}[leftmargin=*, itemsep=0.2cm]  % Increased spacing between items
 
-\item \workentry{Knapsack Optimizer Service}{2019}{Technical Assessment}{
-      A sophisticated optimization service implementing solutions for the NP-hard Knapsack Problem. 
-      Features include RESTful API design, Docker containerization, async processing, and intelligent 
-      caching strategies for improved performance.\\
-      \qrlink{https://github.com/Raudbjorn/knapsack-optimizer-service}{\faGithub\ Raudbjorn/knapsack-optimizer-service}
-}
+\begin{itemize}[leftmargin=2em, itemsep=0.2em]
 
-\item \workentry{ipChecker}{2020}{Distinguishes domestic network traffic}{
-      An innovative PHP implementation for identifying Icelandic IP addresses using DNS queries, 
-      following RIX (Reykjavík Internet Exchange) methodology. Notable for eliminating dependencies 
-      on third-party geolocation databases while maintaining high accuracy.\\
-      \qrlink{https://github.com/Raudbjorn/ipChecker}{\faGithub\ Raudbjorn/ipChecker}
-      }
+\projectentry{missing.cat}{2021}
+ {My cat went missing, and amazingly this TLD was available}
+ { A full-stack web application initially developed for a time-sensitive personal cause, demonstrating the integration of multiple modern web technologies:
+  \begin{itemize}[leftmargin=2em, itemsep=0.2em]
+    \item \href{https://ghost.org/}{Ghost CMS} for content management and publishing.
+    \item \href{https://developers.google.com/gmail/api}{Google Workspace API} integration for communication services.
+    \item \href{https://developers.facebook.com/docs/messenger-platform/}{Facebook Messenger} integration via Causes API.\\
+  \end{itemize}}
+{\projectlink{https://web.archive.org/web/20221209180934/http://missing.cat/}{\faLink\ missing.cat}}
 
-\item \workentry{missing.cat}{2021}{My cat went missing, and amazingly this TLD was available}{      
-      A full-stack web application initially developed for a time-sensitive personal cause, 
-      demonstrating the integration of multiple modern web technologies:
-      \begin{itemize}[leftmargin=2em]
-        \item \href{https://ghost.org/}{Ghost CMS} for content management and publishing.
-        \item \href{https://developers.google.com/gmail/api}{Google Workspace API} integration for communication services.
-        \item \href{https://developers.facebook.com/docs/messenger-platform/}{Facebook Messenger} integration via Causes API.
-      \end{itemize}
-      \qrlink{https://web.archive.org/web/20221209180934/http://missing.cat/}{\faLink\ missing.cat}
-      }
 
-\item \workentry{Leiguvaktin.is}{2014}{Supply and demand analysis for the Reykjavik rental market}{ 
-      A real-time rental market aggregator for Reykjavik, featuring automated data collection 
-      from multiple sources, data normalization, and a user-friendly interface for market analysis.\\
-      \qrlink{https://github.com/Raudbjorn/leiguvaktin}{\faGithub\ Raudbjorn/leiguvaktin}
-      \qrlink{https://web.archive.org/web/20160111052408/http://leiguvaktin.is/}{\faLink\ leiguvaktin.is}
-      }
+\projectentry{ipChecker}{2020}
+{Distinguishes domestic network traffic}
+{An Implementation for identifying Icelandic IP addresses using DNS. Follows Reykjavík Internet Exchange (RIX) methodology. Notable for eliminating dependencies on third-party geolocation databases while maintaining high accuracy.\\}
+{\projectlink{https://github.com/Raudbjorn/ipChecker}{\faGithub\ Raudbjorn/ipChecker}}
+{\projectlink{https://www.rix.is/is-as-nets}{\faLink\ rix.is}}
 
+
+\projectentry{Knapsack Optimizer Service}{2019}
+ {Technical Assessment}
+ {A sophisticated optimization service implementing solutions for the NP-hard Knapsack Problem. Features include RESTful API design, Docker containerization, async processing, and intelligent caching strategies for improved performance.\\}
+ {\projectlink{https://github.com/Raudbjorn/knapsack-optimizer-service}{\faGithub\ Raudbjorn/knapsack-optimizer-service}}
+
+% And for Leiguvaktin.is:
+\projectentry{Leiguvaktin.is}{2014}
+{Supply analysis for the Reykjavik rental market}
+{A real-time rental market aggregator for Reykjavik, featuring automated data collection from multiple sources, data normalization, and a user-friendly interface for market analysis.\\}
+{\projectlink{https://github.com/Raudbjorn/leiguvaktin}{\faGithub\ Raudbjorn/leiguvaktin}}
+{\projectlink{https://web.archive.org/web/20160111052408/http://leiguvaktin.is/}{\faLink\ leiguvaktin.is}}
 \end{itemize}
-
 \newpage
-
 
 
 \cvheading{Certifications}
 \begin{multicols}{2}
-\begin{itemize}[label={}, itemsep=0.5cm]
-    \item \certlink[\udemy]{https://www.udemy.com/certificate/UC-a18343db-3291-4e45-849b-68a584aaac40}{DevOps Ansible Automation} 2023
-    \item \certlink[\udemy]{https://www.udemy.com/certificate/UC-P60ZSDBZ}{The Rust Programming Language} 2018
-    \item \certlink[\coursera]{https://www.coursera.org/account/accomplishments/verify/6ZECRXNYKFSA}{Functional Programming in Scala} 2016
-    \item \certlink[\coursera]{https://www.coursera.org/account/accomplishments/verify/VB7GCM8TMN}{Usable Security} 2015
-    \item \certlink[\coursera]{https://www.coursera.org/account/accomplishments/verify/MYTYH9LQ7V}{Cryptography} 2015
-    \item \certlink[\coursera]{https://www.coursera.org/account/accomplishments/verify/RPFNLVGPF3}{Software Security} 2014
-\end{itemize}
+
+
+
+% Left column
+\certentry[\udemy]{https://www.udemy.com/certificate/UC-a18343db-3291-4e45-849b-68a584aaac40}{DevOps Ansible Automation}{2023}
+
+\certentry[\udemy]{https://www.udemy.com/certificate/UC-P60ZSDBZ}{The Rust Programming Language}{2018}
+
+\certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/6ZECRXNYKFSA}{Functional Programming in Scala}{2016}
+
+\columnbreak
+
+% Right column
+\certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/VB7GCM8TMN}{Usable Security}{2015}
+
+\certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/MYTYH9LQ7V}{Cryptography}{2015}
+
+\certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/RPFNLVGPF3}{Software Security}{2014}
+
 \end{multicols}
 
-\cvheading{References}
 
+\cvheading{Awards}
+\begin{itemize}[leftmargin=2em, itemsep=0.2em]
+\projectentry{Rapyd Internal Hackathon}{2021}
+{Winner}
+{Adapted the Rapyd Wallet product offering to the WhatsApp business API; successfully created a
+sandboxed, fully functional, proof of concept, where a customer can:
+  \begin{itemize}[leftmargin=2em, topsep=0.2em]
+  \item Pay for a restaurant order from inside the app, using a generated link or stored credentials.
+  \item Using WhatsApp, ask a contact to pay for the order. Upon approval, payment for the transaction comes from the contact's funds.
+  \item Request a contact pay for the order, and upon approval from inside WhatsApp, would authorize the use of their wallet for the transaction.
+  \end{itemize}
+}
+{\projectlink{https://community.rapyd.net/t/whatsapp-checkout/1667}{\faNewspaper\ rapyd.net}}
+{\projectlink{https://github.com/Rapyd-Samples/whatsapp-checkout}{\faGithub\ Rapyd-Samples/whatsapp-checkout}}
+\end{itemize}
+
+
+
+\cvheading{References}
 \begin{multicols}{2}
 \raggedright
 % First reference

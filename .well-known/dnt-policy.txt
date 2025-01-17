@@ -1,0 +1,27 @@
+Do Not Track Compliance Policy
+
+Version 1.0
+
+This domain complies with user opt-outs from tracking via the "Do Not Track"
+or "DNT" header  [http://www.w3.org/TR/tracking-dnt/].  This file will always
+be posted via HTTPS at https://sveinbjorn.dev/.well-known/dnt-policy.txt to
+indicate this fact.
+
+SCOPE
+
+This policy document allows an operator of a Fully Qualified Domain Name
+("domain") to declare that it respects Do Not Track as a meaningful privacy
+opt-out of tracking, by posting the policy at https://sveinbjorn.dev/.well-known/dnt-policy.txt
+
+KEY SETTINGS
+
+Operator of this domain agrees:
+
+1. Response to DNT
+When receiving a DNT:1 signal, we do not track the user across sites.
+
+2. Use of DNT Data
+We will not retain or cross-reference DNT users' data.
+
+3. Exceptions
+No exceptions to this policy.

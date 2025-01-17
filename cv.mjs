@@ -1,10 +1,4 @@
-import { GlobalWorkerOptions, getDocument } from '/pdf.min.mjs';
-
-GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
-const url = 'SveinbjornGeirsson.pdf';
-
-
-let pdfDoc = null;
+ let pdfDoc = null;
 let currentScale = 1.5;
 const viewer = document.getElementById('viewer');
 const loading = document.getElementById('loading');

@@ -1,0 +1,10 @@
+/* TEAM */
+Developer: Sveinbjörn Geirsson
+Site: https://sveinbjorn.dev
+Location: Iceland
+
+/* SITE */
+Last update: 2024/01/16
+Standards: HTML5, CSS3
+Components: Font Awesome
+Software: VS Code, Git
