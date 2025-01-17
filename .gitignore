@@ -47,6 +47,10 @@ Thumbs.db
 figures/*.pdf
 plots/*.pdf
 
+#PDF.js specific
+!pdf.min.mjs
+!pdf.worker.min.mjs
+
 # Keep specific PDFs if needed (uncomment and modify as needed)
 !SveinbjornGeirsson.pdf
 
