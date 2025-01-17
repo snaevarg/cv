@@ -1,7 +1,9 @@
 import { GlobalWorkerOptions, getDocument } from '/pdf.min.mjs';
+export const cvUrl = 'SveinbjornGeirsson.pdf';
+export const cvTitle = 'Sveinbjorn Geirsson CV';
+
 
 GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
-const url = 'SveinbjornGeirsson.pdf';
 
 
 let pdfDoc = null;
@@ -76,20 +78,20 @@ const renderAllPages = () => {
 
 // Print functionality
 document.getElementById('print').addEventListener('click', () => {
-    window.open(url);
+    window.open(cvUrl);
 });
 
 // Download functionality
 document.getElementById('download').addEventListener('click', () => {
     const link = document.createElement('a');
-    link.href = url;
+    link.href = cvUrl;
     link.download = 'SveinbjornGeirsson.pdf';
     link.click();
 });
 
 // Load PDF
 loading.style.display = 'block';
-getDocument(url).promise.then((pdfDoc_) => {
+getDocument(cvUrl).promise.then((pdfDoc_) => {
 pdfDoc = pdfDoc_;
 loading.style.display = 'none';
 renderAllPages();
