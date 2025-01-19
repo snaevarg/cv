@@ -78,13 +78,13 @@ const renderAllPages = () => {
 };
 
 // Print functionality
-document.getElementById('print').addEventListener('click', async () => {
-    try {
-        window.print();
-    } catch (error) {
-        console.error('Print failed:', error);
-    }
-});
+// document.getElementById('print').addEventListener('click', async () => {
+//     try {
+//         window.print();
+//     } catch (error) {
+//         console.error('Print failed:', error);
+//     }
+// });
 
 // Download functionality
 document.getElementById('download').addEventListener('click', async () => {
