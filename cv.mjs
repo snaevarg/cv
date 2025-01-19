@@ -1,6 +1,7 @@
 import { GlobalWorkerOptions, getDocument } from '/pdf.min.mjs';
-export const cvUrl = 'SveinbjornGeirsson.pdf';
-export const cvTitle = 'Sveinbjorn Geirsson CV';
+export const cvRootUrl = "https://sveinbjorn.dev"; 
+export const cvUrl = cvRootUrl + '/SveinbjornGeirsson.pdf';
+export const cvTitle = 'Sveinbjörn Geirsson - Developer';
 
 
 GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
@@ -77,17 +78,45 @@ const renderAllPages = () => {
 };
 
 // Print functionality
-document.getElementById('print').addEventListener('click', () => {
-    window.open(cvUrl);
+document.getElementById('print').addEventListener('click', async () => {
+    try {
+        window.print();
+    } catch (error) {
+        console.error('Print failed:', error);
+    }
 });
 
 // Download functionality
-document.getElementById('download').addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.href = cvUrl;
-    link.download = 'SveinbjornGeirsson.pdf';
-    link.click();
+document.getElementById('download').addEventListener('click', async () => {
+    try {
+        const response = await fetch(cvUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'SveinbjornGeirsson.pdf'; // Set desired filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Download failed:', error);
+    }
 });
+
+// Create a function to initialize all event listeners
+const initializeEventListeners = () => {
+    document.getElementById('print').addEventListener('click', handlePrint);
+    document.getElementById('download').addEventListener('click', handleDownload);
+    // Add any other event listeners here
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(renderAllPages, 200);
+    });
+};
+
 
 // Load PDF
 loading.style.display = 'block';

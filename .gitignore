@@ -54,3 +54,4 @@ plots/*.pdf
 # Keep specific PDFs if needed (uncomment and modify as needed)
 !SveinbjornGeirsson.pdf
 
+.history
