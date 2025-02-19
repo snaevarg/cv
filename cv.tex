@@ -2,6 +2,9 @@
   \documentclass[a4paper,10pt]{article}
 
   \usepackage[icelandic,english]{babel}
+  % only english (for now)
+  \selectlanguage{english}
+
   \usepackage{etoolbox}
 
   % Essential packages
@@ -23,13 +26,7 @@
   \usepackage{xurl}  % For better URL breaking
   \usepackage{fvextra}  % For better monospace handling
 
-  % Check if language is defined, default to icelandic if not
-  \ifdefined\cvlanguage
-  \selectlanguage{\cvlanguage}
-\else
-  \selectlanguage{icelandic}
-\fi
-
+  
   % Translation system
   \newcommand{\tr}[2]{%
     \iflanguage{icelandic}{#1}{#2}%
@@ -136,7 +133,7 @@
   \begin{minipage}[t]{0.15\linewidth}
     \raggedleft {\small\textcolor{secondarytext}{#5}}% Year aligned right
   \end{minipage}
-  \par\noindent\hfill{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/\makebox[1.5em][l]{#4}}}% Increased fixed-width box to 2.5em
+  \par\noindent\hfill{\small\href{https://svnbjrn.is/#4}{\textcolor{secondarytext}{\ttfamily svnbjrn.is/#4}}}% Hyperlink for slug
   \vspace{0.4cm}
 }
 
@@ -153,17 +150,18 @@
 }
  
 
-\renewcommand{\projectlink}[3]{%  % #1=full url, #2=icon+text, #3=short url
+\newcommand{\projectlink}[3]{%  % #1=full url, #2=icon+text, #3=short url
   \noindent%
   \hspace*{0.35\linewidth}% Reduced indent to pull links left
   \begin{minipage}[t]{0.65\linewidth}% Increased width for long text
     \raggedright%
     \href{#1}{#2}\\[-0.1cm]%
-    \hfill{\small\textcolor{secondarytext}{\ttfamily #3}}\\[-0.1cm]
+    \hfill{\small\href{https://#3}{\textcolor{secondarytext}{\ttfamily #3}}}\\[-0.1cm]% Hyperlink for slug
     {\color{secondarytext}\hrulefill}% Separator line
   \end{minipage}%
   \vspace{0.2cm}%
 }
+
 
 
   % Create a simpler link command without QR code for reference links
@@ -242,38 +240,38 @@
   }
   \makeatother
   \newcommand{\cvheader}{%
-    \vspace*{-0.5cm}  % Negative vertical space to move everything up
-    \begin{minipage}[t]{0.45\textwidth}
-      \vspace*{-3.5cm}  % Negative vertical space to move everything up
-      {\LARGE\textbf{Sveinbjörn Geirsson}}\\[0.3cm]
-      \tr{Tölvunarfræðingur}{Software Developer}\\[0.4cm]
-      {\color{linkcolor}\href{mailto:sveinbjorn@sveinbjorn.dev}{\faEnvelope\ sveinbjorn@sveinbjorn.dev}}\\[0.2cm]
-      {\color{linkcolor}\href{tel:+3548492544}{\faPhone\ (+354) 849 2544}}\\[0.2cm]
-      \faMapMarker\ \tr{Vífilsgata 15, 105 Reykjavík}{Vifilsgata 15, 105 Reykjavik, Iceland}\\[0.2cm]
-      \faBirthdayCake\ \tr{Apríl 1986}{April 1986}
-    \end{minipage}%
-    \begin{minipage}[t]{0.55\textwidth}
-      \raggedleft
-      \begin{tabular}{p{25em}}
-        \raggedright\color{linkcolor}\href{https://sveinbjorn.dev}{\faGlobe\ sveinbjorn.dev} \\
-        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/cv }} \\[-0.1cm]
-        \color{secondarytext}\hrulefill \\[0.2cm]
-        \raggedright\color{linkcolor}\href{https://xn--sveinbjrn-67a.is}{\isFlag\ sveinbjörn.is} \\
-        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/is }} \\[-0.1cm]
-        \color{secondarytext}\hrulefill \\[0.2cm]
-        \raggedright\color{linkcolor}\href{https://github.com/Raudbjorn}{\faGithub\ Raudbjorn} \\
-        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/gh }} \\[-0.1cm]
-        \color{secondarytext}\hrulefill \\[0.2cm]
-        \raggedright\color{linkcolor}\href{https://linkedin.com/in/sveinbjornG}{\faLinkedin\ sveinbjornG} \\
-        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/in }} \\[-0.1cm]
-        \color{secondarytext}\hrulefill \\[0.2cm]
-        \raggedright\color{linkcolor}\href{https://keys.openpgp.org/vks/v1/by-fingerprint/DA1F35544B1F76D1CCE1016A53EB6860D443E32D}{\faKey\ PGP} \\
-        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/pgp}} \\[-0.1cm]
-        \color{secondarytext}\hrulefill
-      \end{tabular}
-    \end{minipage}
-    \vspace{-0.2cm}}
-
+  \vspace*{-0.5cm}  % Negative vertical space to move everything up
+  \begin{minipage}[t]{0.45\textwidth}
+    \vspace*{-3.5cm}  % Negative vertical space to move everything up
+    {\LARGE\textbf{Sveinbjörn Geirsson}}\\[0.3cm]
+    \tr{Tölvunarfræðingur}{Software Developer}\\[0.4cm]
+    {\color{linkcolor}\href{mailto:sveinbjorn@sveinbjorn.dev}{\faEnvelope\ sveinbjorn@sveinbjorn.dev}}\\[0.2cm]
+    {\color{linkcolor}\href{tel:+3548492544}{\faPhone\ (+354) 849 2544}}\\[0.2cm]
+    \faMapMarker\ \tr{Vífilsgata 15, 105 Reykjavík}{Vifilsgata 15, 105 Reykjavik, Iceland}\\[0.2cm]
+    \faBirthdayCake\ \tr{Apríl 1986}{April 1986}
+  \end{minipage}%
+  \begin{minipage}[t]{0.55\textwidth}
+    \raggedleft
+    \begin{tabular}{p{25em}}
+      \raggedright\color{linkcolor}\href{https://sveinbjorn.dev}{\faGlobe\ sveinbjorn.dev} \\
+      \raggedleft{\small\href{https://svnbjrn.is/cv}{\textcolor{secondarytext}{\ttfamily svnbjrn.is/cv}}} \\[-0.1cm]
+      \color{secondarytext}\hrulefill \\[0.2cm]
+      \raggedright\color{linkcolor}\href{https://xn--sveinbjrn-67a.is}{\isFlag\ sveinbjörn.is} \\
+      \raggedleft{\small\href{https://svnbjrn.is/is}{\textcolor{secondarytext}{\ttfamily svnbjrn.is/is}}} \\[-0.1cm]
+      \color{secondarytext}\hrulefill \\[0.2cm]
+      \raggedright\color{linkcolor}\href{https://github.com/Raudbjorn}{\faGithub\ Raudbjorn} \\
+      \raggedleft{\small\href{https://svnbjrn.is/gh}{\textcolor{secondarytext}{\ttfamily svnbjrn.is/gh}}} \\[-0.1cm]
+      \color{secondarytext}\hrulefill \\[0.2cm]
+      \raggedright\color{linkcolor}\href{https://linkedin.com/in/sveinbjornG}{\faLinkedin\ sveinbjornG} \\
+      \raggedleft{\small\href{https://svnbjrn.is/in}{\textcolor{secondarytext}{\ttfamily svnbjrn.is/in}}} \\[-0.1cm]
+      \color{secondarytext}\hrulefill \\[0.2cm]
+      \raggedright\color{linkcolor}\href{https://keys.openpgp.org/vks/v1/by-fingerprint/DA1F35544B1F76D1CCE1016A53EB6860D443E32D}{\faKey\ PGP} \\
+      \raggedleft{\small\href{https://svnbjrn.is/pgp}{\textcolor{secondarytext}{\ttfamily svnbjrn.is/pgp}}} \\[-0.1cm]
+      \color{secondarytext}\hrulefill
+    \end{tabular}
+  \end{minipage}
+  \vspace{-0.2cm}
+}
   \begin{document}
 
   \cvheader
@@ -469,7 +467,8 @@
   }
   {{\projectlink{https://github.com/Raudbjorn/leiguvaktin}{\faGithub\ Raudbjorn/leiguvaktin}{svnbjrn.is/rent-src}}
   {\projectlink{https://web.archive.org/web/20160111052408/http://leiguvaktin.is/}{\faLink\ leiguvaktin.is}{svnbjrn.is/rent}}}
- 
+ \end{itemize}
+
   \cvheading{\sectionCertifications}
   \begin{multicols}{2}
     % Left column
@@ -498,21 +497,17 @@
   \cvheading{\sectionAwards}
   \begin{itemize}[leftmargin=2em, itemsep=0.2em]
     \projectentry{Rapyd Internal Hackathon}{2021}
-    {\tr{Winner}{Sigurvegari}}
-    {\tr{Adapted the Rapyd Wallet product offering to the WhatsApp business API; successfully created a
-    containerized, fully functional, proof of concept, where a customer can:}
-        {Teymið aðlagaði Rapyd Wallet að WhatsApp Business API; úrlausnin var gámuð, fullvirk, prótótípa, þar sem viðskiptavinur getur:}
+    {Winner}
+   {Adapted the Rapyd Wallet product offering to the WhatsApp business API; successfully created a
+    containerized, fully functional, proof of concept, where a customer can:
+         
   
       \begin{itemize}[leftmargin=2em, topsep=0.2em]
-        \item  \tr {Pay for a restaurant order from inside the app, using a generated link or stored credentials.}
-                  {Borgað fyrir pöntun á veitingastað innan úr WhatsApp með greiðsluhlekk eða geymdum skilríkjum.}
-              
-        \item  \tr {Using WhatsApp, ask a contact to pay for the order. Upon approval, payment for the transaction comes from the contact's funds.}
-                  {Notað WhatsApp til að biðja tengilið um að greiða fyrir pöntunina; við samþykki er greiðslu ráðstafað úr veski tengiliðsins.}
-              
-        \item \tr{Request a contact pay for the order, and upon approval from inside WhatsApp, would authorize the use of their wallet for the transaction.}
-              {Óskað eftir að tengiliður greiði, og að fengnu samþykki innan WhatsApp, myndi leyfa notkun á veskinu sínu fyrir viðskiptin.}
-      \end{itemize}}
+        \item Pay for a restaurant order from inside the app, using a generated link or stored credentials.             
+        \item Using WhatsApp, ask a contact to pay for the order. Upon approval, payment for the transaction comes from the contact's funds.             
+        \item Request a contact pay for the order, and upon approval from inside WhatsApp, would authorize the use of their wallet for the transaction.
+      \end{itemize}
+   }
     {%
       \projectlink{https://community.rapyd.net/t/whatsapp-checkout/1667}{\faNewspaper\ rapyd.net}{svnbjrn.is/rapyd}
       \projectlink{https://github.com/Rapyd-Samples/whatsapp-checkout}{\faGithub\ Rapyd-Samples/whatsapp-checkout}{svnbjrn.is/wacheckout}
@@ -525,9 +520,8 @@
   \raggedright
   % First reference
   \textbf{Tómas Árni Jónsson}\\[0.2cm]
-  \tr{Software Specialist}{Hugbúnaðarsérfræðingur} @ Deloitte\\[0.4cm]
-  \textit{\tr{Partnered on RL's core integration with Central Bank of Iceland's Data Portal, 2023--2024}
-  {Samstarf við aðlögun kjarnakerfa RL að gagnaskilakerfi Seðlabanka Íslands, 2023--2024}}\\[0.4cm]
+  Software Specialist  @ Deloitte\\[0.4cm]
+  \textit{Partnered on RL's core integration with Central Bank of Iceland's Data Portal, 2023--2024}\\[0.4cm]
   \href{tel:+3548926309}{{\color{accent}\faPhone\hspace{0.3em}+354 892 6309}}\\[0.4cm]
   \href{mailto:tomasarni@gmail.com}{{\color{accent}\faEnvelope\hspace{0.3em}tomasarni@gmail.com}}
 
@@ -535,9 +529,8 @@
 
   % Second reference
   \textbf{Þráinn Guðbjörnsson}\\[0.2cm]
-  \tr{Chief Risk Officer}{Áhættustjóri} @ \tr{Festa Pension Fund}{Lífeyrissjóður}\\[0.4cm]
-  \textit{\tr{Collaborated on Korta's earliest system as the company's 2nd and 3rd developers, 2013--2017}
-  {Þróun fyrstu kerfa Korta sem annar og þriðji forritari fyrirtækisins, 2013–2017.}}\\[0.4cm]
+   Chief Risk Officer @ Festa Pension Fund\\[0.4cm]
+  \textit{Collaborated on Korta's earliest system as the company's 2nd and 3rd developers, 2013--2017}\\[0.4cm]
   \href{tel:+3548638308}{{\color{accent}\faPhone\hspace{0.3em}+354 863 8308}}\\[0.4cm]
   \href{mailto:thrainn@gmail.com}{{\color{accent}\faEnvelope\hspace{0.3em}thrainn@gmail.com}}
   \end{multicols}

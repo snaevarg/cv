@@ -3,6 +3,7 @@
 # Default values
 LANGUAGE="both"
 CLEANUP=false
+LOG_FILE="build.log"
 
 # Help message
 show_help() {
@@ -44,21 +45,32 @@ fi
 
 # Function to clean temporary files
 cleanup() {
-    rm -f *.aux *.log *.out
+    echo "Cleaning up temporary files..."
+    rm -f *.aux *.log *.out *.toc *.synctex.gz "$LOG_FILE"
 }
 
 # Function to build a single language version
 build_language() {
-    local lang=$1
+    # local lang=$1
+    local lang="english"
     local output_name
+
     if [ "$lang" = "icelandic" ]; then
         output_name="SveinbjörnGeirsson"
     else
         output_name="SveinbjornGeirsson"
     fi
+
     echo "Building ${lang} version..."
-    xelatex -interaction=nonstopmode -shell-escape "\def\cvlanguage{${lang}} \input{cv.tex}" > /dev/null
-    mv cv.pdf "${output_name}.pdf"
+
+    # Run xelatex and log output
+    if xelatex -interaction=nonstopmode -shell-escape "\PassOptionsToPackage{${lang}}{babel} \input{cv.tex}" > "$LOG_FILE" 2>&1; then
+        mv cv.pdf "${output_name}.pdf"
+        echo "Successfully built ${output_name}.pdf"
+    else
+        echo "Error: Failed to build ${lang} version. Check ${LOG_FILE} for details."
+        exit 1
+    fi
 }
 
 # Main build process
