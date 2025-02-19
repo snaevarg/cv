@@ -1,0 +1,546 @@
+  % !TEX program = xelatex
+  \documentclass[a4paper,10pt]{article}
+
+  \usepackage[icelandic,english]{babel}
+  \usepackage{etoolbox}
+
+  % Essential packages
+  \usepackage{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xcolor}
+  \usepackage{hyperref}
+  \usepackage{qrcode}
+  \usepackage{enumitem}
+  \usepackage{fontawesome5}
+  \usepackage{geometry}
+  \usepackage{titlesec}
+  \usepackage{array}
+  \usepackage{multicol}
+  \usepackage{needspace}
+  \usepackage{svg}
+  % \usepackage{tikz}
+  \usepackage{soul} % For underline customization
+  \usepackage{xurl}  % For better URL breaking
+  \usepackage{fvextra}  % For better monospace handling
+
+  % Check if language is defined, default to icelandic if not
+  \ifdefined\cvlanguage
+  \selectlanguage{\cvlanguage}
+\else
+  \selectlanguage{icelandic}
+\fi
+
+  % Translation system
+  \newcommand{\tr}[2]{%
+    \iflanguage{icelandic}{#1}{#2}%
+  }
+
+  \newcommand{\sectionMe}{\tr{Ég}{Me}}
+  \newcommand{\sectionExperience}{\tr{Reynsla}{Professional Experience}}
+  \newcommand{\sectionSkills}{\tr{Hæfni}{Technical Skills}}
+  \newcommand{\sectionProjects}{\tr{Verkefni}{Notable Projects}}
+  \newcommand{\sectionCertifications}{\tr{Námskeið og Vottanir}{Certifications}}
+  \newcommand{\sectionAwards}{\tr{Viðurkenningar}{Awards}}
+  \newcommand{\sectionReferences}{\tr{Meðmælendur}{References}}
+
+
+  % In the preamble, define a consistent spacing
+  \newlength{\qrspacing}
+  \setlength{\qrspacing}{1em}  % Adjust this value as needed
+
+
+  % Page geometry - compact margins
+  \geometry{
+    top=1.2cm,
+    bottom=1.2cm,
+    left=1.5cm,
+    right=1.5cm
+  }
+
+  % Colors
+  \definecolor{primarytext}{HTML}{000000}
+  \definecolor{secondarytext}{HTML}{4B5563}
+  \definecolor{c02529c}{RGB}{2,82,156}
+  \definecolor{cdc1e35}{RGB}{220,30,53}
+  \definecolor{c003897}{RGB}{0,56,151}
+  \definecolor{cd72828}{RGB}{215,40,40}
+  \definecolor{linkcolor}{HTML}{4A5568}  % Subtle blue-gray
+  \definecolor{accent}{HTML}{5A6572}  % Slightly lighter than secondarytext
+ 
+
+  \hypersetup{
+    pdftitle={Sveinbjörn Geirsson - CV},
+    pdfauthor={Sveinbjörn Geirsson},
+    pdfsubject={Software Developer Resume},
+    pdfkeywords={resume, CV, software developer, cloud infrastructure, Iceland},
+    pdfcreator={XeLaTeX},
+    pdfproducer={XeLaTeX with hyperref},
+    unicode=true,
+    pdfborder={0 0 0},
+    breaklinks=true,
+    colorlinks=true,
+    linkcolor=linkcolor,
+    filecolor=linkcolor,
+    urlcolor=linkcolor,
+    pdfnewwindow=true,
+    pdfdisplaydoctitle=true
+  }
+
+
+  % Font configuration
+  \setmainfont{InterNerdFontPropo}[
+      Path = /usr/share/fonts/inter/,
+      UprightFont = InterNerdFontPropo-Regular.otf,
+      BoldFont = InterNerdFontPropo-Bold.otf,
+      ItalicFont = InterNerdFontPropo-Italic.otf,
+      BoldItalicFont = InterNerdFontPropo-BoldItalic.otf
+  ]
+
+  \newfontfamily{\headingfont}{Iosevka}[
+      UprightFeatures={Font=*},
+      BoldFeatures={Font=* Bold},
+      ItalicFeatures={Font=* Italic},
+      BoldItalicFeatures={Font=* Bold Italic}
+  ]
+  \newfontfamily{\urlfont}{Iosevka}[
+      Scale=0.9,
+      UprightFeatures={Font=*},
+  ]
+
+
+  \newcommand{\isFlag}{%
+    \includesvg[width=1em]{svg/isflag.svg}%
+  }
+
+  \newcommand{\udemy}{%
+    \includesvg[height=1em]{svg/udemy.svg}%
+  }
+
+  \newcommand{\coursera}{%
+    \includesvg[height=1em]{svg/coursera.svg}%
+  }
+ 
+  \let\certentry\undefined
+
+  \newcommand{\certentry}[5][]{%  % #1=platform (optional), #2=full URL, #3=course name, #4=slug, #5=year
+  \noindent
+  \begin{minipage}[t]{0.85\linewidth}
+    % Handle the optional platform parameter
+    \ifx\\#1\\%
+      % No platform specified
+    \else
+      #1\\[0.1cm]% Platform SVG logo on top
+    \fi
+    \href{#2}{\textbf{#3}} % Course Name as hyperlink\\[0.1cm]
+  \end{minipage}%
+  \begin{minipage}[t]{0.15\linewidth}
+    \raggedleft {\small\textcolor{secondarytext}{#5}}% Year aligned right
+  \end{minipage}
+  \par\noindent\hfill{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/\makebox[1.5em][l]{#4}}}% Increased fixed-width box to 2.5em
+  \vspace{0.4cm}
+}
+
+\newcommand{\projectentry}[5]{%  % #1=name, #2=year, #3=subtitle, #4=description, #5=links
+    \item 
+    \textbf{#1} \hfill \textit{#2}\\
+    \textit{#3}\\[0.1cm]
+    \begin{minipage}[t]{\linewidth}
+        #4
+        \vspace{0.2cm}
+        #5
+    \end{minipage}
+    \vspace{0.3cm}
+}
+ 
+
+\renewcommand{\projectlink}[3]{%  % #1=full url, #2=icon+text, #3=short url
+  \noindent%
+  \hspace*{0.35\linewidth}% Reduced indent to pull links left
+  \begin{minipage}[t]{0.65\linewidth}% Increased width for long text
+    \raggedright%
+    \href{#1}{#2}\\[-0.1cm]%
+    \hfill{\small\textcolor{secondarytext}{\ttfamily #3}}\\[-0.1cm]
+    {\color{secondarytext}\hrulefill}% Separator line
+  \end{minipage}%
+  \vspace{0.2cm}%
+}
+
+
+  % Create a simpler link command without QR code for reference links
+  \newcommand{\reflink}[2]{%  % #1=url, #2=display text
+      \href{#1}{#2}\hspace{1em}%
+  }
+
+  % Adjust font sizes
+  \newcommand{\workentry}[4]{%
+    \noindent
+    {\headingfont\large\textbf{#1}} \hfill {\small\textit{#2}}\\[0.1cm]     
+    {\small\textit{#3}}\\[0.1cm]
+    #4
+    \vspace{0.3cm}
+  }
+
+  \newcommand{\skillgroup}[2]{%
+    \textbf{#1}\\
+    #2\\[0.3cm]  % Increased from 0.1cm and removed negative spacing
+  }
+
+  % Update commands to use Iosevka for headings
+  \newcommand{\cvheading}[1]{%
+    {\headingfont\section*{#1}}
+    \vspace{-0.2cm}
+    \hrule
+    \vspace{0.2cm}
+  }
+
+  % Use Iosevka for the name at the top
+  \newcommand{\nameheading}{%
+    {\headingfont\LARGE\textbf{Sveinbjörn Geirsson}}
+  }
+
+  % Tighter lists
+  \setlist{nosep,leftmargin=*}
+
+  % Tighter section spacing
+  \titlespacing{\section}{0pt}{*2}{*1}
+
+
+  \newcommand{\qrlink}[2]{%
+    \begin{minipage}[t]{0.7\linewidth}
+      \raggedleft
+      {\color{linkcolor}\href{#1}{#2}}%
+    \end{minipage}%
+    \begin{minipage}[t]{0.3\linewidth}
+      \raggedleft
+      \raisebox{-0.2\height}{%
+        \qrcode[height=1.1cm,version=4,level=Q]{#1}%
+      }%
+    \end{minipage}%
+  }
+
+
+
+
+  \makeatletter
+  \newcommand{\shorturl}[4][]{%  % #1=icon (optional), #2=full url, #3=short url, #4=display text
+      \begin{minipage}[t]{0.85\linewidth}
+          \raggedright
+          \ifx\\#1\\%
+              % No icon
+          \else
+              {\color{linkcolor}#1}\ %
+          \fi
+          {\color{linkcolor}\urlfont\href{#2}{#4}}%
+      \end{minipage}%
+      \begin{minipage}[t]{0.15\linewidth}
+          \raggedright
+          \raisebox{-0.2\height}{%
+              % Use the shortened URL in the QR code, with reduced error correction
+              \qrcode[height=0.7cm,version=1,level=L]{#3}%
+          }%
+      \end{minipage}\\[0.2cm]% Add line break after each shorturl
+  }
+  \makeatother
+  \newcommand{\cvheader}{%
+    \vspace*{-0.5cm}  % Negative vertical space to move everything up
+    \begin{minipage}[t]{0.45\textwidth}
+      \vspace*{-3.5cm}  % Negative vertical space to move everything up
+      {\LARGE\textbf{Sveinbjörn Geirsson}}\\[0.3cm]
+      \tr{Tölvunarfræðingur}{Software Developer}\\[0.4cm]
+      {\color{linkcolor}\href{mailto:sveinbjorn@sveinbjorn.dev}{\faEnvelope\ sveinbjorn@sveinbjorn.dev}}\\[0.2cm]
+      {\color{linkcolor}\href{tel:+3548492544}{\faPhone\ (+354) 849 2544}}\\[0.2cm]
+      \faMapMarker\ \tr{Vífilsgata 15, 105 Reykjavík}{Vifilsgata 15, 105 Reykjavik, Iceland}\\[0.2cm]
+      \faBirthdayCake\ \tr{Apríl 1986}{April 1986}
+    \end{minipage}%
+    \begin{minipage}[t]{0.55\textwidth}
+      \raggedleft
+      \begin{tabular}{p{25em}}
+        \raggedright\color{linkcolor}\href{https://sveinbjorn.dev}{\faGlobe\ sveinbjorn.dev} \\
+        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/cv }} \\[-0.1cm]
+        \color{secondarytext}\hrulefill \\[0.2cm]
+        \raggedright\color{linkcolor}\href{https://xn--sveinbjrn-67a.is}{\isFlag\ sveinbjörn.is} \\
+        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/is }} \\[-0.1cm]
+        \color{secondarytext}\hrulefill \\[0.2cm]
+        \raggedright\color{linkcolor}\href{https://github.com/Raudbjorn}{\faGithub\ Raudbjorn} \\
+        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/gh }} \\[-0.1cm]
+        \color{secondarytext}\hrulefill \\[0.2cm]
+        \raggedright\color{linkcolor}\href{https://linkedin.com/in/sveinbjornG}{\faLinkedin\ sveinbjornG} \\
+        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/in }} \\[-0.1cm]
+        \color{secondarytext}\hrulefill \\[0.2cm]
+        \raggedright\color{linkcolor}\href{https://keys.openpgp.org/vks/v1/by-fingerprint/DA1F35544B1F76D1CCE1016A53EB6860D443E32D}{\faKey\ PGP} \\
+        \raggedleft{\small\textcolor{secondarytext}{\ttfamily svnbjrn.is/pgp}} \\[-0.1cm]
+        \color{secondarytext}\hrulefill
+      \end{tabular}
+    \end{minipage}
+    \vspace{-0.2cm}}
+
+  \begin{document}
+
+  \cvheader
+
+  % Me section
+  \cvheading{\sectionMe}
+  \tr{Hugbúnaðarsérfræðingur með yfir áratugs reynslu í greiðslukortaiðnaðinum, þar sem áhersla hefur verið lögð á áreiðanleika, öryggi og hraða. Drífandi og lausnamiðaður, með áhuga á stöðugri framþróun, sjálfvirkni innviða og þróun vandaðs hugbúnaðar sem er traustur og vel hannaður frá grunni.}
+  {Software engineer with a decade of experience in the payment card industry, focusing on reliability, security, and speed. Passionate about continuous delivery, infrastructure automation, and functional programming, especially in languages where the compiler can be leveraged for robust code validation and optimization.}
+  \vspace{0.1cm}  % Reduce extra space created by line break
+
+
+  % Experience section
+  \cvheading{\sectionExperience}
+
+  \workentry{Reiknistofa Lífeyrissjóða}{2023 - 2025}
+  {\tr{Hugbúnaðarsérfræðingur}{Software Engineer}}{
+    \vspace{-0.4cm}
+    \begin{itemize}
+      \item \tr{Þróaði og viðhélt hugbúnaðarkerfi sem þjónustar lífeyrissjóði við allt frá húsnæðislánum, verðbréfum, og samskiptum vegna þeirra til eftirlitsaðila, til ráðstöfun á réttindum sjóðsfélaga vegna örorku eða aldurs.}
+      {Developed and maintained software systems serving pension funds, handling everything from mortgages, securities, and their regulatory communications, to managing fund members' disability and retirement benefits.}
+      
+      \item \tr{Annaðist uppsetningu og viðhaldi á X-Road öryggisþjóni; öruggu samskiptalagi sem forritunarskil við stjórnvöld.}
+      {Managed the setup and maintenance of X-Road security server; a secure communication layer providing programming interfaces for government services.}
+      
+      \item \tr{Stór hluti af skyldum var skýrslugjöf til Seðlabanka Íslands; skuldbindingaskrá sem m.a. innheldur stöðu allra lánaveitinga til fasteignakaupa.}
+      {A major part of responsibilities involved reporting to the Central Bank of Iceland; including obligations registry containing status of all mortgage lending.}
+    \end{itemize}
+  }
+
+  \workentry{Rapyd Financial Services}{2013 - 2022}{Software Engineer}{
+  \begin{description}[
+    leftmargin=1em,
+    labelwidth=0pt,
+    itemindent=0pt,
+    listparindent=0pt,
+    parsep=0.1cm,    % Space between paragraphs within an item
+    itemsep=0.1cm    % Space between items
+  ]
+  \vspace{-0.4cm}  % Reduce extra space created by line break
+
+    \item[\textbf{Payment Processing \& Settlement}]\mbox{}\\ % Force line break after heading
+    \vspace{-0.4cm}  % Reduce extra space created by line break
+      \begin{itemize}[leftmargin=1em, topsep=0pt]
+        \item Designed and developed a sophisticated settlement engine to calculate merchant fees, rolling reserves, and refunds, incorporating complex clearing logic.
+        \item Developed a flexible payment orchestration system to manage domestic and international transfers with intelligent batching.
+        \item Integrated loyalty program balance systems with real-time reconciliation capabilities.
+      \end{itemize}
+    \item[\textbf{Financial Systems Integration}]\mbox{}\\
+    \vspace{-0.4cm}
+      \begin{itemize}[leftmargin=1em, topsep=0pt]
+        \item Designed robust Visa/MC reconciliation pipeline with advanced data normalization for seamless ledger integration.
+        \item Implemented sophisticated multi-currency cost/value date calculation system for diverse financial instruments.
+        \item Developed comprehensive chargeback and dispute cost management framework.
+      \end{itemize}
+    \item[\textbf{Reporting \& Risk Management}]\mbox{}\\
+    \vspace{-0.4cm}
+      \begin{itemize}[leftmargin=1em, topsep=0pt]
+        \item Built real-time reporting infrastructure for payment facilitators with automated volume and balance tracking.
+        \item Engineered fraud detection and chargeback resolution systems with advanced reporting capabilities.
+        \item Created optimized database views enabling cross-system integration with minimal domain knowledge requirements.
+      \end{itemize}
+  
+    \item[\textbf{Core Infrastructure Services}]\mbox{}\\
+    \vspace{-0.4cm}
+      \begin{itemize}[leftmargin=1em, topsep=0pt]
+        \item Implemented real-time FX rate processing system integrating rates from Visa, Mastercard, and central banks.
+        \item Developed intelligent transaction categorization system for product offerings and geographical boundaries.
+        \item Built systems for processing complex financial data streams including chargebacks and interchange.
+      \end{itemize}
+  \end{description}
+  }
+  \newpage
+
+  % Skills section
+  \cvheading{\sectionSkills}
+
+  % Define column spacing and format
+  \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+  
+  % Calculate column widths for 3 columns with minimal spacing
+  \newlength{\skillcolwidth}
+  \setlength{\skillcolwidth}{0.31\textwidth}
+  
+  % Skills table with three columns
+  \begin{tabular}{L{\skillcolwidth}|L{\skillcolwidth}|L{\skillcolwidth}}
+  \textbf{Core Development} & 
+  \textbf{Database Systems} & 
+  \textbf{Network Services} \\
+  \begin{itemize}[leftmargin=*]
+    \item Java
+    \item Python
+    \item Scala
+    \item JavaScript
+    \item TypeScript
+    \item C\#
+    \item PHP
+  \end{itemize} & 
+  \begin{itemize}[leftmargin=*]
+    \item IBM DB2 (iSeries/LUW)
+    \item IBM Informix
+    \item MariaDB
+    \item MySQL
+    \item PostgreSQL
+    \item SQLite
+    \item Redis
+    \item SQL-93+OLAP
+    \item SparkSQL
+    \item XML+XPath/JSON+GraphQL
+    \item Arrow
+    \item Parquet
+  \end{itemize} & 
+  \begin{itemize}[leftmargin=*]
+    \item Cloudflare
+    \item Route 53
+    \item Apache / Nginx / Traefik
+    \item X-Road
+    \item WebRTC+TURN/STUN
+  \end{itemize} \\
+  \hline
+  
+  \textbf{Cloud \& Infrastructure} & 
+  \textbf{API \& Observability} & 
+  \textbf{Security \& Identity} \\
+  \begin{itemize}[leftmargin=*]
+    \item GCP / AWS / Oracle Cloud
+    \item containerd / Docker / Podman
+    \item k3s
+    \item Ansible
+    \item Terraform
+    \item KVM
+  \end{itemize} & 
+  \begin{itemize}[leftmargin=*]
+    \item gRPC
+    \item OpenAPI/Swagger
+    \item Datadog
+    \item Prometheus
+    \item Sentry
+    \item Grafana / Loki
+  \end{itemize} & 
+  \begin{itemize}[leftmargin=*]
+    \item OAuth 2.0
+    \item OpenID Connect
+    \item Certbot+ACME/DNS01
+    \item MX/DKIM/SPF
+    \item WireGuard / Tailscale / Shadowsocks
+   \end{itemize} \\
+  \hline
+  
+  \textbf{Development Operations} & & \\
+  \begin{itemize}[leftmargin=*]
+    \item Jira / Confluence / Bitbucket
+    \item Kanban / Agile / Scrum
+  \end{itemize} & & \\
+  \end{tabular}
+  
+  \cvheading{\sectionProjects}
+  \begin{itemize}[leftmargin=2em]
+    \projectentry{missing.cat}{2021}
+    {\tr{Kötturinn minn týndist, og svo ótrúlega vildi til að þetta lén var laust}
+        {My cat went missing, and amazingly this TLD was available}}
+    {\tr{Var upphaflega útfært mjög rösklega, og því frekar gróf lausn, en innihélt upphaflega:}
+        {A full-stack web application initially developed for a time-sensitive personal cause, demonstrating the integration of multiple modern web technologies:}
+      \begin{itemize}
+        \item \href{https://ghost.org/}{Ghost CMS} \tr{sem framenda}{for content management and publishing}.
+        \item \href{https://developers.google.com/gmail/api}{Google Workspace API}{\tr{fyrir tölvupóstþjónustu}{integration for communication services}.}
+        \item \tr{Innbyggðan}{Integrated} \href{https://developers.facebook.com/docs/messenger-platform/}{Facebook Messenger} \tr{, sem tengdist okkur í gegnum "Causes"-síðu.}{via Causes API.}
+      \end{itemize}}
+    {\projectlink{https://missing.cat/}{\faLink\ missing.cat}{svnbjrn.is/cat}}
+
+
+    \projectentry{ipChecker}{2020}
+    {\tr{Aðgreinir innlenda umferð frá erlendri}
+        {Distinguishes domestic network traffic}}
+  {\tr{PHP útfærsla á nálguninni sem lýst er af Reykjavík Internet Exchange (RIX) til að skera úr um hvort IP-tala er íslensk án þess að reiða sig á gagnagrunn frá þriðja aðila.\\}
+  {An Implementation for identifying Icelandic IP addresses using DNS. Follows Reykjavík Internet Exchange (RIX) methodology. Notable for eliminating dependencies on third-party geolocation databases while maintaining high accuracy.\\}}
+  {\projectlink{https://github.com/Raudbjorn/ipChecker}{\faGithub\ Raudbjorn/ipChecker}{svnbjrn.is/ip}}
+  {\projectlink{https://www.rix.is/is-as-nets}{\faLink\ rix.is}{svnbjrn.is/rix}}
+
+  
+
+  \projectentry{Knapsack Optimizer Service}{2019}
+  {\tr{Hæfnispróf}{Technical Assessment}}
+  {\tr {Gámavædd, ósamstillt, REST-leg, skyndiminnug vefþjónusta, sem getur leyst Hnappapokavandamálið - frægt vandamál í tölvunarfræði. Leyst sem hluti af ráðningarferli stórrar alþjóðlegrar samsteypu.\\}
+  {A sophisticated optimization service implementing solutions for the NP-hard Knapsack Problem. Features include RESTful API design, Docker containerization, async processing, and intelligent caching strategies for improved performance.\\}}
+  {\projectlink{https://github.com/Raudbjorn/knapsack-optimizer-service}{\faGithub\ Raudbjorn/knapsack-optimizer-service}{svnbjrn.is/sack}}
+
+  \projectentry{Leiguvaktin.is}{2014}
+  {\tr{Staða framboðs á leigumarkaði Reykjavíkur}
+      {Supply analysis for the Reykjavik rental market}}
+  {\tr{Tilraunagæluverkefni sem miðar að því að koma samantekt á lifandi gögnum um íbúðir til leigu á Íslandi frá mörgum auglýsendum á einn stað.}
+      {A real-time rental market aggregator for Reykjavik, featuring automated data collection from multiple sources, data normalization, and a user-friendly interface for market analysis.}
+  \vspace{0.1cm}% Added small space here
+  }
+  {{\projectlink{https://github.com/Raudbjorn/leiguvaktin}{\faGithub\ Raudbjorn/leiguvaktin}{svnbjrn.is/rent-src}}
+  {\projectlink{https://web.archive.org/web/20160111052408/http://leiguvaktin.is/}{\faLink\ leiguvaktin.is}{svnbjrn.is/rent}}}
+ 
+  \cvheading{\sectionCertifications}
+  \begin{multicols}{2}
+    % Left column
+    \certentry[\udemy]{https://www.udemy.com/certificate/UC-a18343db-3291-4e45-849b-68a584aaac40}
+    {DevOps Ansible Automation}{nsbl}{2023}
+  
+    \certentry[\udemy]{https://www.udemy.com/certificate/UC-P60ZSDBZ}
+    {The Rust Programming Language}{rst}{2018}
+  
+    \certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/6ZECRXNYKFSA}
+    {Functional Programming in Scala}{scl}{2016}
+  
+    \columnbreak
+  
+    % Right column
+    \certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/VB7GCM8TMN}
+    {Usable Security}{usc}{2015}
+  
+    \certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/MYTYH9LQ7V}
+    {Cryptography}{cry}{2015}
+  
+    \certentry[\coursera]{https://www.coursera.org/account/accomplishments/verify/RPFNLVGPF3}
+    {Software Security}{ssc}{2014}
+  \end{multicols}
+
+  \cvheading{\sectionAwards}
+  \begin{itemize}[leftmargin=2em, itemsep=0.2em]
+    \projectentry{Rapyd Internal Hackathon}{2021}
+    {\tr{Winner}{Sigurvegari}}
+    {\tr{Adapted the Rapyd Wallet product offering to the WhatsApp business API; successfully created a
+    containerized, fully functional, proof of concept, where a customer can:}
+        {Teymið aðlagaði Rapyd Wallet að WhatsApp Business API; úrlausnin var gámuð, fullvirk, prótótípa, þar sem viðskiptavinur getur:}
+  
+      \begin{itemize}[leftmargin=2em, topsep=0.2em]
+        \item  \tr {Pay for a restaurant order from inside the app, using a generated link or stored credentials.}
+                  {Borgað fyrir pöntun á veitingastað innan úr WhatsApp með greiðsluhlekk eða geymdum skilríkjum.}
+              
+        \item  \tr {Using WhatsApp, ask a contact to pay for the order. Upon approval, payment for the transaction comes from the contact's funds.}
+                  {Notað WhatsApp til að biðja tengilið um að greiða fyrir pöntunina; við samþykki er greiðslu ráðstafað úr veski tengiliðsins.}
+              
+        \item \tr{Request a contact pay for the order, and upon approval from inside WhatsApp, would authorize the use of their wallet for the transaction.}
+              {Óskað eftir að tengiliður greiði, og að fengnu samþykki innan WhatsApp, myndi leyfa notkun á veskinu sínu fyrir viðskiptin.}
+      \end{itemize}}
+    {%
+      \projectlink{https://community.rapyd.net/t/whatsapp-checkout/1667}{\faNewspaper\ rapyd.net}{svnbjrn.is/rapyd}
+      \projectlink{https://github.com/Rapyd-Samples/whatsapp-checkout}{\faGithub\ Rapyd-Samples/whatsapp-checkout}{svnbjrn.is/wacheckout}
+    }
+  \end{itemize}
+
+
+  \cvheading{\sectionReferences}
+  \begin{multicols}{2}
+  \raggedright
+  % First reference
+  \textbf{Tómas Árni Jónsson}\\[0.2cm]
+  \tr{Software Specialist}{Hugbúnaðarsérfræðingur} @ Deloitte\\[0.4cm]
+  \textit{\tr{Partnered on RL's core integration with Central Bank of Iceland's Data Portal, 2023--2024}
+  {Samstarf við aðlögun kjarnakerfa RL að gagnaskilakerfi Seðlabanka Íslands, 2023--2024}}\\[0.4cm]
+  \href{tel:+3548926309}{{\color{accent}\faPhone\hspace{0.3em}+354 892 6309}}\\[0.4cm]
+  \href{mailto:tomasarni@gmail.com}{{\color{accent}\faEnvelope\hspace{0.3em}tomasarni@gmail.com}}
+
+  \columnbreak
+
+  % Second reference
+  \textbf{Þráinn Guðbjörnsson}\\[0.2cm]
+  \tr{Chief Risk Officer}{Áhættustjóri} @ \tr{Festa Pension Fund}{Lífeyrissjóður}\\[0.4cm]
+  \textit{\tr{Collaborated on Korta's earliest system as the company's 2nd and 3rd developers, 2013--2017}
+  {Þróun fyrstu kerfa Korta sem annar og þriðji forritari fyrirtækisins, 2013–2017.}}\\[0.4cm]
+  \href{tel:+3548638308}{{\color{accent}\faPhone\hspace{0.3em}+354 863 8308}}\\[0.4cm]
+  \href{mailto:thrainn@gmail.com}{{\color{accent}\faEnvelope\hspace{0.3em}thrainn@gmail.com}}
+  \end{multicols}
+
+
+  \end{document}
