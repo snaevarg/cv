@@ -2,7 +2,7 @@
     "links": [
       {
         "rel": "lrdd",
-        "template": "https://sveinbjorn.dev/.well-known/webfinger?resource={uri}"
+        "template": "https://snaev.ar/.well-known/webfinger?resource={uri}"
       }
     ]
   }

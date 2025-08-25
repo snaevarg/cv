@@ -1,6 +1,6 @@
 /* TEAM */
-Developer: Sveinbjörn Geirsson
-Site: https://sveinbjorn.dev
+Developer: Snævar Geirsson
+Site: https://snaev.ar
 Location: Iceland
 
 /* SITE */

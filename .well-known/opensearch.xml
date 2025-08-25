@@ -1,13 +1,13 @@
 ?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-  <ShortName>Sveinbjorn.dev Search</ShortName>
-  <Description>Search Sveinbjorn.dev</Description>
+  <ShortName>snaev.ar Search</ShortName>
+  <Description>Search snaev.ar</Description>
   <Tags>portfolio developer</Tags>
-  <Contact>search@sveinbjorn.dev</Contact>
+  <Contact>search@snaev.ar</Contact>
   <Url type="text/html" 
-       template="https://sveinbjorn.dev/search?q={searchTerms}"/>
+       template="https://snaev.ar/search?q={searchTerms}"/>
   <Image height="16" width="16" type="image/x-icon">
-    https://sveinbjorn.dev/favicon.ico
+    https://snaev.ar/favicon.ico
   </Image>
   <InputEncoding>UTF-8</InputEncoding>
   <OutputEncoding>UTF-8</OutputEncoding>

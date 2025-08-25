@@ -52,6 +52,6 @@ plots/*.pdf
 !pdf.worker.min.mjs
 
 # Keep specific PDFs if needed (uncomment and modify as needed)
-!SveinbjornGeirsson.pdf
+!SnaevarGeirsson.pdf
 
 .history

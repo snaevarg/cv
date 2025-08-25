@@ -1,24 +1,23 @@
 {
-  "subject": "acct:sveinbjorn@sveinbjorn.dev",
+  "subject": "acct:snaevar@snaev.ar",
   "aliases": [
-    "https://sveinbjorn.dev/",
-    "https://xn--sveinbjrn-r1a.is"
+    "https://snaev.ar/"
   ],
   "links": [
     {
       "rel": "http://webfinger.net/rel/profile-page",
       "type": "text/html",
-      "href": "https://sveinbjorn.dev/@sveinbjorn"
+      "href": "https://snaev.ar/@snaevar"
     },
     {
       "rel": "self",
       "type": "application/activity+json",
-      "href": "https://sveinbjorn.dev/users/sveinbjorn"
+      "href": "https://snaev.ar/users/snaevar"
     },
     {
       "rel": "http://schemas.google.com/g/2010#updates-from",
       "type": "application/atom+xml",
-      "href": "https://sveinbjorn.dev/feed.xml"
+      "href": "https://snaev.ar/feed.xml"
     }
   ]
 }
