@@ -4,7 +4,7 @@ Simple, fast, and reliable CV hosting using GitHub Pages, Cloudflare, and Mozill
 
 ## 🌐 Live Sites
 
-```- **English**: [snaev.ar/en](https://snaev.ar/en)```
+- **English**: [snaev.ar/en](https://snaev.ar/en)
 - **Íslenska**: [snaev.ar](https://snaev.ar)
 
 ## 📁 Repository Structure
@@ -68,7 +68,7 @@ https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(pdfUr
 ## 🌐 Domain Configuration
 
 The CNAME file contains the custom domain, enabling GitHub Pages to serve content at:
-```- `sveinbjorn.dev` (English version)```
+- `snaev.ar/en` (English version)
 - `snaev.ar` (Icelandic version)
 
 Cloudflare DNS is configured with CNAME flattening to point the root domains to the respective GitHub Pages URLs.
